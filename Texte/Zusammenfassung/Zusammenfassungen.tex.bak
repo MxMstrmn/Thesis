@@ -1,0 +1,56 @@
+% \documentclass[CEJM,DVI]{cej} % use DVI command to enable LaTeX driver
+\documentclass[CEJM,PDF]{cej} % use PDF command to enable PDFLaTeX driver
+\usepackage{layout}
+\usepackage{amsmath}
+\usepackage{mwe}    % loads »blindtext« and »graphicx«
+\usepackage{subfig}
+\usepackage{float}
+\def\lorem{}
+
+\def\LOREM{\lorem \\ \lorem}
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[svgnames]{xcolor}
+\definecolor{cool}{HTML}{0063a4}
+
+\usepackage{hyperref}% http://ctan.org/pkg/hyperref
+\hypersetup{%
+  colorlinks = true,
+  linkcolor  = cool
+}
+
+\newcommand{\mos}{MoS$_2$ }
+\newcommand{\mose}{MoSe$_2$ }
+\newcommand{\ws}{WS$_2$ }
+
+\title{Zusammenfassung von wichtigen Aspekten der Bachelorarbeit über TMDC}
+
+%\articletype{Article category} % Research Article, Review Article, Communication, Erratum
+
+\articletype{}
+
+\author{Laura Martens\email{lmartens@uni-bremen.de},
+        Leon Hetzel\email{lhetzel@uni-bremen.de}
+       }
+
+\shortauthor{L. Martens, L. Hetzel}
+
+\institute{
+           Department of Physics, University of Bremen }
+
+\abstract{
+}
+
+\keywords{}
+
+\msc{}
+
+\begin{document}
+\maketitle
+%\baselinestretch{2}
+\include{Abschnitte/Numerik}
+\include{Abschnitte/TMDC}
+$x^2\Big |_a^b$
+\end{document}
