@@ -1,0 +1,13 @@
+\section{Herleitung der Wanniergleichung}
+\section{Lösen der Wanniergleichung}
+Die Wanniergleichung beschreibt die als Exzitonen bezeichneten gebundenen Zustände zwischen einem Elektron im Leitungsband und dem im Valenzband existierenden Loch. Die Wanniergleichung ist eine direkte Folge aus der Coulombwechselwirkung und hat die Gestalt der 2-Teilchen-Schrödingergleichung, ist also vergleichbar mit einem effektiven Wasserstoffproblem. Aufgrund der deutlich geringeren effektiven Lochmasse $m_\nu$ gegenüber der Protonenmasse ist es notwendig das Problem in Schwerpunktkoordinaten zu transformieren und dann zu separieren. Für die Schwerpunktskoordinate ergibt sich die Bewegung eines freien Teilchens, wobei für die Relativkoordinate zwischen Elektron und Loch Folgendes gilt: 
+\begin{alignat}{2}
+  \mu &=\dfrac{m_\nu m_l}{m_\nu + m_l} && \qquad\text{Effektive Masse}\\
+ \left [-\frac{\hbar^2}{2\mu}\nabla ^2 + V(r)\right ]\Psi(\vec{r}) &= E\, \Psi(\vec{r}) && \qquad\text{Wanniergleichung}\\
+ V(r)&=-\dfrac{e^2}{4\pi\epsilon_0}\cdot \dfrac{1}{r} &&\qquad \text{Coulombpotential}
+\end{alignat}
+Grundsätzlich ist zu unterscheiden in wie vielen Dimensionen das Problem behandelt wird. Für 3 und 2 Dimensionen bleibt das Vorgehen allerdings das identisch, Unterschiede entstehen nur dadurch, dass im 2 dimensionalen Fall ein ausschließlich numerisch zu lösendes Integral auftaucht.\\ 
+Der Lösungsweg führt hierbei über die Transformation der SGL in den Impulsraum, wobei das Faltungstheorem zur Bestimmung von $\mathcal{F}[V(r)\Psi(\vec{r})](k)$ ausgenutzt wird. Dies ist möglich, da die $k$-Werte im reziproken Raum so dicht liegen, dass der Übergang von eigentlich diskreten $k$-Werten hin zur Integraldarstellung unter Berücksichtigung des k-Volumens $\frac{(2\pi)^d}{V}$ möglich ist. Darüber hinaus ist zu beachten, dass in Hinsicht auf die numerische Behandlung des Problems konvergenzerzeugende Faktoren notwendig sind, um das Problem in ein im Computer lösbares Eigenwertproblem zu überführen. \\ \\
+Nach dieser eher groben Beschreibung soll das Problem nun in aller Ausführlichkeit besprochen werden. 
+\subsection{Lösen des 2D Problems}
+\subsection{Lösen des 3D Problems}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.5)  10 JUL 2017 11:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.5)  11 JUL 2017 16:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -807,7 +807,7 @@ File: svgnam.def 2016/05/11 v2.12 Predefined colors according to SVG 1.1 (UK)
 ))
 Package hyperref Info: Option `colorlinks' set `true' on input line 22.
 
-(./Zusammenfassungen.aux (./Abschnitte/Numerik.aux) (./Abschnitte/TMDC.aux))
+(./Zusammenfassungen.aux (./Abschnitte/TMDC.aux) (./Abschnitte/Numerik.aux))
 \openout1 = `Zusammenfassungen.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
@@ -949,9 +949,9 @@ Package xcolor Warning: Incompatible color definition on input line 50.
 
 Package xcolor Warning: Incompatible color definition on input line 50.
 
-\openout2 = `Abschnitte/Numerik.aux'.
+\openout2 = `Abschnitte/TMDC.aux'.
 
-(./Abschnitte/Numerik.tex
+(./Abschnitte/TMDC.tex
 
 Package xcolor Warning: Incompatible color definition on input line 1.
 
@@ -970,11 +970,7 @@ LaTeX Font Warning: Font shape `T1/square721exeu/m/n' undefined
 
 Package xcolor Warning: Incompatible color definition on input line 1.
 
-[1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
-\openout2 = `Abschnitte/TMDC.aux'.
-
-
-(./Abschnitte/TMDC.tex
+[1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
 LaTeX Font Warning: Font shape `T1/cmr/bx/n' in size <15> not available
 (Font)              size <14.4> substituted on input line 1.
@@ -1132,29 +1128,29 @@ Package xcolor Warning: Incompatible color definition on input line 35.
 
 )
 
-Package xcolor Warning: Incompatible color definition on input line 53.
+Package xcolor Warning: Incompatible color definition on input line 52.
 
 
-Package xcolor Warning: Incompatible color definition on input line 53.
+Package xcolor Warning: Incompatible color definition on input line 52.
 
 
-Package xcolor Warning: Incompatible color definition on input line 53.
+Package xcolor Warning: Incompatible color definition on input line 52.
 
 
-Package xcolor Warning: Incompatible color definition on input line 53.
+Package xcolor Warning: Incompatible color definition on input line 52.
 
 [5]
 
-Package xcolor Warning: Incompatible color definition on input line 54.
+Package xcolor Warning: Incompatible color definition on input line 53.
 
 
-Package xcolor Warning: Incompatible color definition on input line 54.
+Package xcolor Warning: Incompatible color definition on input line 53.
 
 
-Package xcolor Warning: Incompatible color definition on input line 54.
+Package xcolor Warning: Incompatible color definition on input line 53.
 
 
-Package xcolor Warning: Incompatible color definition on input line 54.
+Package xcolor Warning: Incompatible color definition on input line 53.
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
@@ -1162,6 +1158,49 @@ Underfull \hbox (badness 10000) has occurred while \output is active
  []
 
 [6]
+\openout2 = `Abschnitte/Numerik.aux'.
+
+ (./Abschnitte/Numerik.tex
+
+Package xcolor Warning: Incompatible color definition on input line 1.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--12
+
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 12.
+
+
+Package xcolor Warning: Incompatible color definition on input line 13.
+
+)
+
+Package xcolor Warning: Incompatible color definition on input line 54.
+
+
+Package xcolor Warning: Incompatible color definition on input line 54.
+
+
+Package xcolor Warning: Incompatible color definition on input line 54.
+
+
+Package xcolor Warning: Incompatible color definition on input line 54.
+
+[7
+\@writefile{toc}{\contentsline {section}{\numberline {2}Herleitung der Wannierg
+leichung}{7}{section*.9}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}L\IeC {\"o}sen der Wann
+iergleichung}{7}{section*.10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}L\IeC {\"o}sen des
+ 2D Problems}{7}{section*.11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}L\IeC {\"o}sen des
+ 3D Problems}{7}{section*.12}}
+]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 55.
 
 
@@ -1176,20 +1215,19 @@ Package xcolor Warning: Incompatible color definition on input line 55.
 
 Package xcolor Warning: Incompatible color definition on input line 55.
 
-[7]
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[8]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 55.
- (./Zusammenfassungen.aux (./Abschnitte/Numerik.aux) (./Abschnitte/TMDC.aux))
+ (./Zusammenfassungen.aux (./Abschnitte/TMDC.aux) (./Abschnitte/Numerik.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 55.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 55.
+Package rerunfilecheck Info: File `Zusammenfassungen.out' has not changed.
+(rerunfilecheck)             Checksum: CAE3971EC6A4EB97A1F5BD9D9A95E30F;202.
 
-
-Package rerunfilecheck Warning: File `Zusammenfassungen.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Zusammenfassungen.out':
-(rerunfilecheck)             Before: CE62473DBC19F745D7E1013AAE5A65A3;68
-(rerunfilecheck)             After:  6B4936DC02FB78D525D9D45FDA282F23;69.
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.72pt have occured.
@@ -1200,34 +1238,36 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
  )
 (\end occurred when \iftrue on line 50 was incomplete) 
 Here is how much of TeX's memory you used:
- 10646 strings out of 493014
- 151013 string characters out of 6133352
+ 10661 strings out of 493014
+ 151196 string characters out of 6133352
  379680 words of memory out of 5000000
- 14001 multiletter control sequences out of 15000+600000
- 23320 words of font info for 57 fonts, out of 8000000 for 9000
+ 14007 multiletter control sequences out of 15000+600000
+ 24086 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,9n,42p,1451b,343s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,10n,42p,1451b,343s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/
 texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/local/texlive/2016/te
 xmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/local/texlive/2016
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2016/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2016/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fo
-nts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive/2016/texmf-dist/font
-s/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2016/texmf-dist/fonts/
-type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
-pe1/public/cm-super/sfbx1728.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
-1/public/cm-super/sfrm0700.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/
-public/cm-super/sfrm0800.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
-blic/cm-super/sfrm0900.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
-ic/cm-super/sfti0900.pfb>
-Output written on Zusammenfassungen.pdf (7 pages, 230091 bytes).
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2016/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/font
+s/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2016/texmf-dist/fonts/
+type1/public/cm-super/sfbx1000.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
+pe1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
+1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/
+public/cm-super/sfbx1728.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
+blic/cm-super/sfrm0700.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
+ic/cm-super/sfrm0800.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
+/cm-super/sfrm0900.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/c
+m-super/sfti0900.pfb>
+Output written on Zusammenfassungen.pdf (8 pages, 258469 bytes).
 PDF statistics:
- 115 PDF objects out of 1000 (max. 8388607)
- 90 compressed objects within 1 object stream
- 16 named destinations out of 1000 (max. 500000)
- 9 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 142 PDF objects out of 1000 (max. 8388607)
+ 113 compressed objects within 2 object streams
+ 24 named destinations out of 1000 (max. 500000)
+ 25 words of extra memory for PDF output out of 10000 (max. 10000000)
 
