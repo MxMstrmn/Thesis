@@ -1,5 +1,9 @@
-.aux
-.log
+*.aux
+*.log
+*.out
+*.synctex
+*.tex.bak
+*.cej
 .gz
 .DS_Store
 Texte/.DS_Store
