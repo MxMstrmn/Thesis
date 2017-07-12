@@ -7,7 +7,16 @@ Die Wanniergleichung beschreibt die als Exzitonen bezeichneten gebundenen Zustä
  V(r)&=-\dfrac{e^2}{4\pi\epsilon_0}\cdot \dfrac{1}{r} &&\qquad \text{Coulombpotential}
 \end{alignat}
 Grundsätzlich ist zu unterscheiden in wie vielen Dimensionen das Problem behandelt wird. Für 3 und 2 Dimensionen bleibt das Vorgehen allerdings das identisch, Unterschiede entstehen nur dadurch, dass im 2 dimensionalen Fall ein ausschließlich numerisch zu lösendes Integral auftaucht.\\ 
-Der Lösungsweg führt hierbei über die Transformation der SGL in den Impulsraum, wobei das Faltungstheorem zur Bestimmung von $\mathcal{F}[V(r)\Psi(\vec{r})](k)$ ausgenutzt wird. Dies ist möglich, da die $k$-Werte im reziproken Raum so dicht liegen, dass der Übergang von eigentlich diskreten $k$-Werten hin zur Integraldarstellung unter Berücksichtigung des k-Volumens $\frac{(2\pi)^d}{V}$ möglich ist. Darüber hinaus ist zu beachten, dass in Hinsicht auf die numerische Behandlung des Problems konvergenzerzeugende Faktoren notwendig sind, um das Problem in ein im Computer lösbares Eigenwertproblem zu überführen. \\ \\
-Nach dieser eher groben Beschreibung soll das Problem nun in aller Ausführlichkeit besprochen werden. 
-\subsection{Lösen des 2D Problems}
+Der Lösungsweg führt hierbei über die Transformation der SGL in den Impulsraum, wobei das Faltungstheorem zur Bestimmung von $\mathcal{F}[V(r)\Psi(\Vr)](k)$ ausgenutzt wird. Dies ist möglich, da die $k$-Werte im reziproken Raum so dicht liegen, dass der Übergang von eigentlich diskreten $k$-Werten hin zur Integraldarstellung unter Berücksichtigung des k-Volumens $\frac{(2\pi)^d}{V}$ möglich ist. Darüber hinaus ist zu beachten, dass in Hinsicht auf die numerische Behandlung des Problems konvergenzerzeugende Faktoren notwendig sind, um das Problem in ein im Computer lösbares Eigenwertproblem zu überführen. \\ \\
+Nach dieser groben Beschreibung soll das Problem nun in aller Ausführlichkeit besprochen werden. Es gilt: 
+\begin{alignat*}{3}
+&& \Psi(\Vk)\coloneqq \mathcal{F}[\Psi(\Vr)](\Vk) && &= \frac{1}{V}\int \Psi(\Vr)\e ^{\I\Vk\Vr}d^n r \qquad\qquad n=2,3 \\
+&& \mathcal{F}[\Delta \Psi(\Vr)](\Vk) && &= -k^2\Psi(\Vk) \qquad \text{wegen Isotropie:}\qquad \Psi(\Vk)=\Psi(k)\\
+&& \widetilde{V}(k)\coloneqq \mathcal{F}[V(r)](k) && &= \frac{1}{V}\int V(r)\e ^{\I\Vk\Vr}d^n r  \\
+&& \mathcal{F}[V(r)\Psi(\Vr)](\Vk) && &=\widetilde{V}(k)*\Psi(\Vk) \ \\
+&& \widetilde{V}(k)*\Psi(\Vk)  && &= \sum\limits_{k'} {V}(k-k')\Psi(\Vk ') \\
+&& && &= \frac{V}{(2\pi)^n}\int {V}(k-k')\Psi(\Vk ') d^n k'
+\end{alignat*}
 \subsection{Lösen des 3D Problems}
+Da sich das Problem in 3 Dimensionen sogar analytisch behandeln lässt, wird dieses zuerst behandelt. 
+\subsection{Lösen des 2D Problems}
