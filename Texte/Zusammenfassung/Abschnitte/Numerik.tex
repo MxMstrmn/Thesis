@@ -9,14 +9,32 @@ Die Wanniergleichung beschreibt die als Exzitonen bezeichneten gebundenen Zustä
 Grundsätzlich ist zu unterscheiden in wie vielen Dimensionen das Problem behandelt wird. Für 3 und 2 Dimensionen bleibt das Vorgehen allerdings das identisch, Unterschiede entstehen nur dadurch, dass im 2 dimensionalen Fall ein ausschließlich numerisch zu lösendes Integral auftaucht.\\ 
 Der Lösungsweg führt hierbei über die Transformation der SGL in den Impulsraum, wobei das Faltungstheorem zur Bestimmung von $\mathcal{F}[V(r)\Psi(\Vr)](k)$ ausgenutzt wird. Dies ist möglich, da die $k$-Werte im reziproken Raum so dicht liegen, dass der Übergang von eigentlich diskreten $k$-Werten hin zur Integraldarstellung unter Berücksichtigung des k-Volumens $\frac{(2\pi)^d}{V}$ möglich ist. Darüber hinaus ist zu beachten, dass in Hinsicht auf die numerische Behandlung des Problems konvergenzerzeugende Faktoren notwendig sind, um das Problem in ein im Computer lösbares Eigenwertproblem zu überführen. \\ \\
 Nach dieser groben Beschreibung soll das Problem nun in aller Ausführlichkeit besprochen werden. Es gilt: 
-\begin{alignat*}{3}
-&& \Psi(\Vk)\coloneqq \mathcal{F}[\Psi(\Vr)](\Vk) && &= \frac{1}{V}\int \Psi(\Vr)\e ^{\I\Vk\Vr}d^n r \qquad\qquad n=2,3 \\
-&& \mathcal{F}[\Delta \Psi(\Vr)](\Vk) && &= -k^2\Psi(\Vk) \qquad \text{wegen Isotropie:}\qquad \Psi(\Vk)=\Psi(k)\\
-&& \widetilde{V}(k)\coloneqq \mathcal{F}[V(r)](k) && &= \frac{1}{V}\int V(r)\e ^{\I\Vk\Vr}d^n r  \\
-&& \mathcal{F}[V(r)\Psi(\Vr)](\Vk) && &=\widetilde{V}(k)*\Psi(\Vk) \ \\
-&& \widetilde{V}(k)*\Psi(\Vk)  && &= \sum\limits_{k'} {V}(k-k')\Psi(\Vk ') \\
-&& && &= \frac{V}{(2\pi)^n}\int {V}(k-k')\Psi(\Vk ') d^n k'
+\begin{alignat*}{2}
+ \Psi(\Vk)\coloneqq \mathcal{F}[\Psi(\Vr)](\Vk) && &= \frac{1}{V}\int \Psi(\Vr)\e ^{\I\Vk\Vr}d^n r \qquad\qquad n=2,3 \\
+ \mathcal{F}[\Delta \Psi(\Vr)](\Vk) && &= -k^2\Psi(\Vk) \qquad \text{wegen Isotropie:}\qquad \Psi(\Vk)=\Psi(k)\\
+ \widetilde{V}(k)\coloneqq \mathcal{F}[V(r)](k) && &= \frac{1}{V}\int V(r)\e ^{\I\Vk\Vr}d^n r  \\
+ \mathcal{F}[V(r)\Psi(\Vr)](\Vk) && &=\widetilde{V}(k)*\Psi(\Vk) \ \\
+ \widetilde{V}(k)*\Psi(\Vk)  && &= \sum\limits_{k'}  \widetilde{V}(k-k')\Psi(\Vk ') \\
+ && &= \frac{V}{(2\pi)^n}\int  \widetilde{V}(k-k')\Psi(\Vk ') d^n k'
 \end{alignat*}
 \subsection{Lösen des 3D Problems}
-Da sich das Problem in 3 Dimensionen sogar analytisch behandeln lässt, wird dieses zuerst behandelt. 
+Da sich das Problem in 3 Dimensionen sogar analytisch behandeln lässt, wird dieses zuerst behandelt. Für die Schrödingergleichung ergibt sich nun: 
+\begin{align*}
+\left [-\frac{\hbar^2}{2\mu}\nabla ^2 + V(r)\right ]\Psi(\vec{r}) &= E\, \Psi(\vec{r}) \qquad \leftrightarrow \qquad\left [\frac{\hbar^2k^2}{2\mu}-E  \right ]\Psi(k) =\underbrace{ \frac{V}{(2\pi)^3} \int  \widetilde{V}(k-k')\Psi(\Vk ') d^3 k'}_{= \text{Glg.1}} \\
+\end{align*}
+Die Aufgabe ist nun Glg.1 zu lösen. Dabei gilt für die Fouriertransformierte des Coulombpotentials: 
+\begin{alignat*}{2}
+									&& &\widetilde V(k) = -\frac{1}{V}\frac{e^2}{\epsilon_0 |\Vk |^2} \qquad , \\
+\text{sodass}\qquad 	&& \frac{V}{(2\pi)^3} \int  &\widetilde{V}(k-k')\Psi(k ') d^3 k' = \underbrace{-\frac{e^2}{(2\pi)^3 \epsilon_0}}_{\coloneqq c} \int  \Psi(k ')\frac{1}{|\Vk - \Vk '|^2} d^3 k'
+\end{alignat*}
+Mit Hilfe des Kosinussatzes und der Wahlfreiheit des Koordinatensystems ergibt sich: 
+\begin{alignat*}{2}
+&& |\Vk - \Vk ' |^2 &= \Vk ^2 + \Vk '^2 -2|\Vk ||\Vk '|\cos(\vartheta) 	 \\
+\text{also}\qquad && c \int  \Psi(k ')\frac{1}{|\Vk - \Vk '|^2} d^3 k' 	&= c\int\limits_{0}^{\infty}\int\limits_{0}^{\pi}\int\limits_{0}^{2\pi} \Psi(k ')\frac{k '^2 \sin(\vartheta)}{k ^2 + k '^2 -2kk '\cos(\vartheta)} \,d\varphi \, d\vartheta \, dk' \\
+&& &= 2\pi c\int\limits_{0}^{\infty}\int\limits_{-1}^{1} \Psi(k ')\frac{k '^2}{k ^2 + k '^2 -2kk 'u} \,du \, dk' \\
+&& &= -2\pi c\int\limits_{0}^{\infty} \Psi(k ')\frac{k '^2}{2kk '}\ln{(k ^2 + k '^2 -2kk 'u)}\Big |_{-1}^1 \,dk' \\
+&& &= \underbrace{2\pi \,c}_{-\dfrac{e^2}{4\pi^2 \epsilon_0}} \int\limits_{0}^{\infty} \Psi(k ')\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |} \, dk' \\
+\text{folglich}\qquad &&  \frac{e^2}{(2\pi)^3 \epsilon_0} \int  \Psi(k ')\frac{1}{|\Vk - \Vk '|^2} d^3 k' &= -\dfrac{e^2}{4\pi^2 \epsilon_0} \int\limits_{0}^{\infty} \Psi(k ')\underbrace{\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}}_{k\neq0\  \wedge \  k\neq k'} \, dk' 
+\end{alignat*}
+An dieser Stelle ergeben sich zwei Schwierigkeiten. Zum einen wird das Integral für $k = 0$ singulär, was sich jedoch als harmlos erweist, wenn man den Grenzwert $k \rightarrow 0$ betrachtet. Zum anderen divergiert der Logarithmus im Integral $\forall k=k'$, was einen zunächst vor eine Herausforderung stellt. 
 \subsection{Lösen des 2D Problems}
