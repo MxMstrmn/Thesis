@@ -20,7 +20,7 @@ Nach dieser groben Beschreibung soll das Problem nun in aller Ausführlichkeit b
 \subsection{Lösen des 3D Problems}
 Da sich das Problem in 3 Dimensionen sogar analytisch behandeln lässt, wird dieses zuerst behandelt. Für die Schrödingergleichung ergibt sich nun: 
 \begin{align*}
-\left [-\frac{\hbar^2}{2\mu}\nabla ^2 + V(r)\right ]\Psi(\vec{r}) &= E\, \Psi(\vec{r}) \qquad \leftrightarrow \qquad\left [\frac{\hbar^2k^2}{2\mu}-E  \right ]\Psi(k) =\underbrace{ \frac{V}{(2\pi)^3} \int  \widetilde{V}(k-k')\Psi(\Vk ') d^3 k'}_{= \text{Glg.1}} \\
+\left [-\frac{\hbar^2}{2\mu}\nabla ^2 + V(r)\right ]\Psi(\vec{r}) &= E\, \Psi(\vec{r}) \qquad \leftrightarrow \qquad\left [\frac{\hbar^2k^2}{2\mu}-E  \right ]\Psi(k) =\underbrace{ \frac{V}{(2\pi)^3} \int  \widetilde{V}(k-k')\Psi(\Vk ') d^3 k'}_{= \, \text{Glg.1}} \\
 \end{align*}
 Die Aufgabe ist nun Glg.1 zu lösen. Dabei gilt für die Fouriertransformierte des Coulombpotentials: 
 \begin{alignat*}{2}
@@ -29,12 +29,44 @@ Die Aufgabe ist nun Glg.1 zu lösen. Dabei gilt für die Fouriertransformierte d
 \end{alignat*}
 Mit Hilfe des Kosinussatzes und der Wahlfreiheit des Koordinatensystems ergibt sich: 
 \begin{alignat*}{2}
-&& |\Vk - \Vk ' |^2 &= \Vk ^2 + \Vk '^2 -2|\Vk ||\Vk '|\cos(\vartheta) 	 \\
-\text{also}\qquad && c \int  \Psi(k ')\frac{1}{|\Vk - \Vk '|^2} d^3 k' 	&= c\int\limits_{0}^{\infty}\int\limits_{0}^{\pi}\int\limits_{0}^{2\pi} \Psi(k ')\frac{k '^2 \sin(\vartheta)}{k ^2 + k '^2 -2kk '\cos(\vartheta)} \,d\varphi \, d\vartheta \, dk' \\
-&& &= 2\pi c\int\limits_{0}^{\infty}\int\limits_{-1}^{1} \Psi(k ')\frac{k '^2}{k ^2 + k '^2 -2kk 'u} \,du \, dk' \\
-&& &= -2\pi c\int\limits_{0}^{\infty} \Psi(k ')\frac{k '^2}{2kk '}\ln{(k ^2 + k '^2 -2kk 'u)}\Big |_{-1}^1 \,dk' \\
-&& &= \underbrace{2\pi \,c}_{-\dfrac{e^2}{4\pi^2 \epsilon_0}} \int\limits_{0}^{\infty} \Psi(k ')\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |} \, dk' \\
-\text{folglich}\qquad &&  \frac{e^2}{(2\pi)^3 \epsilon_0} \int  \Psi(k ')\frac{1}{|\Vk - \Vk '|^2} d^3 k' &= -\dfrac{e^2}{4\pi^2 \epsilon_0} \int\limits_{0}^{\infty} \Psi(k ')\underbrace{\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}}_{k\neq0\  \wedge \  k\neq k'} \, dk' 
+									&& |\Vk - \Vk ' |^2 &= \Vk ^2 + \Vk '^2 -2|\Vk ||\Vk '|\cos(\vartheta) 	 \\
+\text{also}\qquad 		&& c \int  \Psi(k ')\frac{1}{|\Vk - \Vk '|^2} d^3 k' 	&= c\int\limits_{0}^{\infty}\int\limits_{0}^{\pi}\int\limits_{0}^{2\pi} \Psi(k ')\frac{k '^2 \sin(\vartheta)}{k ^2 + k '^2 -2kk '\cos(\vartheta)} \,d\varphi \, d\vartheta \, dk' \\
+									&& &= 2\pi c\int\limits_{0}^{\infty}\int\limits_{-1}^{1} \Psi(k ')\frac{k '^2}{k ^2 + k '^2 -2kk 'u} \,du \, dk' \\
+									&& &= -2\pi c\int\limits_{0}^{\infty} \Psi(k ')\frac{k '^2}{2kk '}\ln{(k ^2 + k '^2 -2kk 'u)}\Big |_{\text{-}1}^1 \,dk' \\
+									&& &= \underbrace{2\pi \,c}_{-\dfrac{e^2}{4\pi^2 \epsilon_0}} \int\limits_{0}^{\infty} \Psi(k ')\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |} \, dk' \\
+\text{folglich}\qquad 	&&  \frac{e^2}{(2\pi)^3 \epsilon_0} \int  \Psi(k ')\frac{1}{|\Vk - \Vk '|^2} d^3 k' &= -\dfrac{e^2}{4\pi^2 \epsilon_0} \int\limits_{0}^{\infty} \Psi(k ')\underbrace{\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}}_{k\neq0\  \wedge \  k\neq k'} \, dk' 
 \end{alignat*}
-An dieser Stelle ergeben sich zwei Schwierigkeiten. Zum einen wird das Integral für $k = 0$ singulär, was sich jedoch als harmlos erweist, wenn man den Grenzwert $k \rightarrow 0$ betrachtet. Zum anderen divergiert der Logarithmus im Integral $\forall k=k'$, was einen zunächst vor eine Herausforderung stellt. 
+An dieser Stelle ergeben sich zwei Schwierigkeiten. Zum einen wird das Integral für $k = 0$ singulär, was sich jedoch als harmlos erweist, wenn man den Grenzwert $k \rightarrow 0$ betrachtet. Zum anderen divergiert der Logarithmus im Integral $\forall k=k'$, was einen zunächst vor eine Herausforderung stellt. \\ \\
+\subsubsection{Punkt 1: $k\rightarrow0$}
+\begin{alignat*}{3}
+\lim_{k\rightarrow 0}\,\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |} \ \  &&  \stackrel{\text{L.H.}}{=} \ \ \lim_{k\rightarrow 0}\,\frac{k '}{1}\frac{1}{\left |\frac{k + k '}{k-k'}\right |}\left |-\frac{2k'}{(k-k')^2}\right | \ \ = \ \  \lim_{k\rightarrow 0}\,\left |\frac{2k '^2}{{k^2 - k '^2}}\right | \ \ = \ \ 2 
+\end{alignat*}
+Damit ist gezeigt, dass der Integrand für $k \rightarrow 0$ einen endlichen Wert annimmt und damit nicht zum Integral beiträgt. 
+\subsubsection{Punkt 2: $k = k'$}
+Die Lösung dieses Problems teilt sich auf in zwei wesentliche Überlegungen. Zum einen ist zweckmäßig das Integral so aufzuteilen, dass sich ein Teil ergibt, der nur für $k\neq k'$ Beiträge liefert. Entsprechend gibt es einen anderen Teil, der sämtliche Beiträge enthält, bei denen $k=k'$ gilt. Die zweite Überlegung folgt aus der Konvergenzbetrachtung der Integrale. Da diese über den gesamten Radialbereich ausgewertet werden, kann durch Verändern des Konvergenzverhaltens des Integranden der Grenzwert eines eigentlich divergierenden Integrals bestimmt werden. \\
+Konkret ergibt sich: 
+\begin{alignat*}{2}
+\int\limits_{0}^{\infty} \Psi(k ')\underbrace{\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}}_{\coloneqq \, V_\text{eff}(k,k')}\, dk' && &=\int\limits_{0}^{\infty} \Psi(k ')\frac{k '}{k}\ln{\left |\frac{k +k '}{k-k'}\right |}-X+X\, dk'\\
+&& &= \int\limits_{0}^{\infty} \underbrace{\Psi(k ')\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}-X}_{\stackrel{!}{=}0,\text{falls }k=k',\text{ Teil 1}}\, dk' + 
+		 	\int\limits_{0}^{\infty} \underbrace{\Psi(k ')\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}X}_{\text{Teil 2}}\, dk' 
+\end{alignat*}
+Es ist sofort ersichtlich, dass $X \propto \Psi(k)$ sein sollte, um die an Teil 1 gestellte Bedingung zu erfüllen. Bezüglich der Lösbarkeit von Teil 2 muss außerdem ein Konvergenzfaktor berücksichtigt werden, der die Form $g(k,k') = \frac{4k^4}{(k^2 + k'^2)^2}$ besitzt. So ergibt sich insgesamt für $X$: 
+$$X = g(k,k')\frac{V_\text{eff}(k,k')}{\Psi(k')}\Psi(k)  = \frac{4k^4}{(k^2+k '^2) ^2}\frac{V_\text{eff}(k,k')}{\Psi(k')}\Psi(k)$$
+\begin{alignat*}{4}
+\text{Teil 1:}\qquad 	&&  \int\limits_{0}^{\infty} \Psi(k ')V_\text{eff}(k,k')-X \,dk' && \ \ = \ \ &&
+											&\int\limits_{0}^{\infty} V_\text{eff}(k,k')\left [\Psi(k ')-\frac{4k^4}{(k^2+k '^2)^2}\Psi(k)\right ]\,dk'  \\ 
+\text{Teil 2:}\qquad 	&& 	\int\limits_{0}^{\infty} \Psi(k ')V_\text{eff}(k,k')X   && \ \ = \ \ &&
+											&\Psi(k)\int\limits_{0}^{\infty} \frac{4k^4}{(k^2+k '^2)^2}V_\text{eff}(k,k')\,dk'
+\end{alignat*}
+In Hinblick auf die numerische Behandlung muss Teil 2 noch weiter analysiert werden, während Teil 1 schon diskretisiert werden kann. Schlussendlich ergibt sich auf diese Weise ein Eigenwertproblem, welches die Exzitonenenergien liefert. 
+\begin{alignat*}{2}
+\int\limits_{0}^{\infty} \frac{4k^4}{(k^2+k '^2)^2}V_\text{eff}(k,k')\,dk' 
+						&& \ \ &=\ \ \int\limits_{0}^{\infty} \frac{4k^4}{(k^2+k '^2)^2}\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}\,dk' \\
+						&& \ \ &=\ \ 	\int\limits_{0}^{\infty} \frac{4u}{(1+u^2)^2}\ln{\left |\frac{1 + u}{1-u}\right |}\,du \\
+						&& \ \ &=\ \ 	\int\limits_{0}^{\infty} \left (\frac{-2}{(1+u^2)}\right )'\ln{\left |\frac{1 + u}{1-u}\right |}\,du \\
+						&& \ \ &\stackrel{\text{P.I.}}{=}\ \ \underbrace{\left (\frac{-2}{(1+u^2)}\right )\ln{\left | \frac{1 + u}{1-u}\right |}\Big |_{0}^{\infty}}_{=\,0}
+						+\int\limits_{0}^{\infty} \left (\frac{-2}{(1+u^2)}\right )\frac{1 - u}{1+u}\frac{2}{(1-u)^2}\,du \\
+						&& \ \ &=\ \ 	\int\limits_{0}^{\infty} \frac{4}{(1-u^4)}\,du  \\
+						&& \ \ &=\ \ 	\int\limits_{0}^{\infty} \left (\frac{1}{1-u}+\frac{1}{1+u}\right )+\frac{1}{1+u^2}\,du  
+\end{alignat*}
 \subsection{Lösen des 2D Problems}
