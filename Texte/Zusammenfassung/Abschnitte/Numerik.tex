@@ -9,18 +9,18 @@ Die Wanniergleichung beschreibt die als Exzitonen bezeichneten gebundenen Zustä
 Grundsätzlich ist zu unterscheiden in wie vielen Dimensionen das Problem behandelt wird. Für 3 und 2 Dimensionen bleibt das Vorgehen allerdings das identisch, Unterschiede entstehen nur dadurch, dass im 2 dimensionalen Fall ein ausschließlich numerisch zu lösendes Integral auftaucht.\\ 
 Der Lösungsweg führt hierbei über die Transformation der SGL in den Impulsraum, wobei das Faltungstheorem zur Bestimmung von $\mathcal{F}[V(r)\Psi(\Vr)](k)$ ausgenutzt wird. Dies ist möglich, da die $k$-Werte im reziproken Raum so dicht liegen, dass der Übergang von eigentlich diskreten $k$-Werten hin zur Integraldarstellung unter Berücksichtigung des k-Volumens $\frac{(2\pi)^d}{V}$ möglich ist. Darüber hinaus ist zu beachten, dass in Hinsicht auf die numerische Behandlung des Problems konvergenzerzeugende Faktoren notwendig sind, um das Problem in ein im Computer lösbares Eigenwertproblem zu überführen. \\ \\
 Nach dieser groben Beschreibung soll das Problem nun in aller Ausführlichkeit besprochen werden. Es gilt: 
-\begin{alignat*}{2}
- \Psi(\Vk)\coloneqq \mathcal{F}[\Psi(\Vr)](\Vk) && &= \frac{1}{V}\int \Psi(\Vr)\e ^{\I\Vk\Vr}d^n r \qquad\qquad n=2,3 \\
- \mathcal{F}[\Delta \Psi(\Vr)](\Vk) && &= -k^2\Psi(\Vk) \qquad \text{wegen Isotropie:}\qquad \Psi(\Vk)=\Psi(k)\\
- \widetilde{V}(k)\coloneqq \mathcal{F}[V(r)](k) && &= \frac{1}{V}\int V(r)\e ^{\I\Vk\Vr}d^n r  \\
- \mathcal{F}[V(r)\Psi(\Vr)](\Vk) && &=\widetilde{V}(k)*\Psi(\Vk) \ \\
- \widetilde{V}(k)*\Psi(\Vk)  && &= \sum\limits_{k'}  \widetilde{V}(k-k')\Psi(\Vk ') \\
- && &= \frac{V}{(2\pi)^n}\int  \widetilde{V}(k-k')\Psi(\Vk ') d^n k'
+\begin{alignat*}{4}
+ \Psi(\Vk)\coloneqq \mathcal{F}[\Psi(\Vr)](\Vk) && = \frac{1}{V}\int \Psi(\Vr)\e ^{\I\Vk\Vr}d^n r \qquad\qquad n=2,3 &&
+ \mathcal{F}[\Delta \Psi(\Vr)](\Vk) && = -k^2\Psi(\Vk) \qquad \text{wegen Isotropie:}\qquad \Psi(\Vk)=\Psi(k)\\
+ \widetilde{V}(k)\coloneqq \mathcal{F}[V(r)](k) && = \frac{1}{V}\int V(r)\e ^{\I\Vk\Vr}d^n r  &&
+  \mathcal{F}[V(r)\Psi(\Vr)](\Vk) 	&& =\widetilde{V}(k)*\Psi(\Vk) \ \\
+ && && \widetilde{V}(k)*\Psi(\Vk)  			&& = \sum\limits_{k'}  \widetilde{V}(k-k')\Psi(\Vk ') \\
+ && && 														&& = \frac{V}{(2\pi)^n}\int  \widetilde{V}(k-k')\Psi(\Vk ') d^n k'
 \end{alignat*}
 \subsection{Lösen des 3D Problems}
 Da sich das Problem in 3 Dimensionen sogar analytisch behandeln lässt, wird dieses zuerst behandelt. Für die Schrödingergleichung ergibt sich nun: 
 \begin{align*}
-\left [-\frac{\hbar^2}{2\mu}\nabla ^2 + V(r)\right ]\Psi(\vec{r}) &= E\, \Psi(\vec{r}) \qquad \leftrightarrow \qquad\left [\frac{\hbar^2k^2}{2\mu}-E  \right ]\Psi(k) =\underbrace{ \frac{V}{(2\pi)^3} \int  \widetilde{V}(k-k')\Psi(\Vk ') d^3 k'}_{= \, \text{Glg.1}} \\
+\left [-\frac{\hbar^2}{2\mu}\nabla ^2 + V(r)\right ]\Psi(\vec{r}) &= E\, \Psi(\vec{r}) \qquad \leftrightarrow \qquad\left [\frac{\hbar^2k^2}{2\mu}-E  \right ]\Psi(k) =\underbrace{ \frac{V}{(2\pi)^3} \int  \widetilde{V}(k-k')\Psi(\Vk ') d^3 k'}_{= \, \text{Glg.1}} 
 \end{align*}
 Die Aufgabe ist nun Glg.1 zu lösen. Dabei gilt für die Fouriertransformierte des Coulombpotentials: 
 \begin{alignat*}{2}
@@ -29,13 +29,20 @@ Die Aufgabe ist nun Glg.1 zu lösen. Dabei gilt für die Fouriertransformierte d
 \end{alignat*}
 Mit Hilfe des Kosinussatzes und der Wahlfreiheit des Koordinatensystems ergibt sich: 
 \begin{alignat*}{2}
-									&& |\Vk - \Vk ' |^2 &= \Vk ^2 + \Vk '^2 -2|\Vk ||\Vk '|\cos(\vartheta) 	 \\
+									&& &|\Vk - \Vk ' |^2 = \Vk ^2 + \Vk '^2 -2|\Vk ||\Vk '|\cos(\vartheta) 	 \\
+\text{folglich}\qquad 	&&  &\frac{e^2}{(2\pi)^3 \epsilon_0} \int  \Psi(k ')\frac{1}{|\Vk - \Vk '|^2} d^3 k' = -\dfrac{e^2}{4\pi^2 \epsilon_0} \int\limits_{0}^{\infty} \Psi(k ')\underbrace{\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}}_{k\neq0\  \wedge \  k\neq k'} \, dk' 
+\end{alignat*}
+
+\begin{comment}
+%
+%		Diese Rechnungen gehören in die obige Gleichung uns sind die Lösung schritt für Schritt
+%
 \text{also}\qquad 		&& c \int  \Psi(k ')\frac{1}{|\Vk - \Vk '|^2} d^3 k' 	&= c\int\limits_{0}^{\infty}\int\limits_{0}^{\pi}\int\limits_{0}^{2\pi} \Psi(k ')\frac{k '^2 \sin(\vartheta)}{k ^2 + k '^2 -2kk '\cos(\vartheta)} \,d\varphi \, d\vartheta \, dk' \\
 									&& &= 2\pi c\int\limits_{0}^{\infty}\int\limits_{-1}^{1} \Psi(k ')\frac{k '^2}{k ^2 + k '^2 -2kk 'u} \,du \, dk' \\
 									&& &= -2\pi c\int\limits_{0}^{\infty} \Psi(k ')\frac{k '^2}{2kk '}\ln{(k ^2 + k '^2 -2kk 'u)}\Big |_{\text{-}1}^1 \,dk' \\
 									&& &= \underbrace{2\pi \,c}_{-\dfrac{e^2}{4\pi^2 \epsilon_0}} \int\limits_{0}^{\infty} \Psi(k ')\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |} \, dk' \\
-\text{folglich}\qquad 	&&  \frac{e^2}{(2\pi)^3 \epsilon_0} \int  \Psi(k ')\frac{1}{|\Vk - \Vk '|^2} d^3 k' &= -\dfrac{e^2}{4\pi^2 \epsilon_0} \int\limits_{0}^{\infty} \Psi(k ')\underbrace{\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}}_{k\neq0\  \wedge \  k\neq k'} \, dk' 
-\end{alignat*}
+\end{comment}
+
 An dieser Stelle ergeben sich zwei Schwierigkeiten. Zum einen wird das Integral für $k = 0$ singulär, was sich jedoch als harmlos erweist, wenn man den Grenzwert $k \rightarrow 0$ betrachtet. Zum anderen divergiert der Logarithmus im Integral $\forall k=k'$, was einen zunächst vor eine Herausforderung stellt. \\ \\
 \subsubsection{Punkt 1: $k\rightarrow0$}
 \begin{alignat*}{3}
@@ -46,22 +53,31 @@ Damit ist gezeigt, dass der Integrand für $k \rightarrow 0$ einen endlichen Wer
 Die Lösung dieses Problems teilt sich auf in zwei wesentliche Überlegungen. Zum einen ist zweckmäßig das Integral so aufzuteilen, dass sich ein Teil ergibt, der nur für $k\neq k'$ Beiträge liefert. Entsprechend gibt es einen anderen Teil, der sämtliche Beiträge enthält, bei denen $k=k'$ gilt. Die zweite Überlegung folgt aus der Konvergenzbetrachtung der Integrale. Da diese über den gesamten Radialbereich ausgewertet werden, kann durch Verändern des Konvergenzverhaltens des Integranden der Grenzwert eines eigentlich divergierenden Integrals bestimmt werden. \\
 Konkret ergibt sich: 
 \begin{alignat*}{2}
-\int\limits_{0}^{\infty} \Psi(k ')\underbrace{\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}}_{\coloneqq \, V_\text{eff}(k,k')}\, dk' && &=\int\limits_{0}^{\infty} \Psi(k ')\frac{k '}{k}\ln{\left |\frac{k +k '}{k-k'}\right |}-X+X\, dk'\\
-&& &= \int\limits_{0}^{\infty} \underbrace{\Psi(k ')\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}-X}_{\stackrel{!}{=}0,\text{falls }k=k',\text{ Teil 1}}\, dk' + 
+\int\limits_{0}^{\infty} \Psi(k ')\underbrace{\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}}_{\coloneqq \, V_\text{eff}(k,k')}\, dk' && = \int\limits_{0}^{\infty} \underbrace{\Psi(k ')\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}-X}_{\stackrel{!}{=}0,\text{falls }k=k',\text{ Teil 1}}\, dk' + 
 		 	\int\limits_{0}^{\infty} \underbrace{\Psi(k ')\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}X}_{\text{Teil 2}}\, dk' 
 \end{alignat*}
 Es ist sofort ersichtlich, dass $X \propto \Psi(k)$ sein sollte, um die an Teil 1 gestellte Bedingung zu erfüllen. Bezüglich der Lösbarkeit von Teil 2 muss außerdem ein Konvergenzfaktor berücksichtigt werden, der die Form $g(k,k') = \frac{4k^4}{(k^2 + k'^2)^2}$ besitzt. So ergibt sich insgesamt für $X$: 
-$$X = g(k,k')\frac{V_\text{eff}(k,k')}{\Psi(k')}\Psi(k)  = \frac{4k^4}{(k^2+k '^2) ^2}\frac{V_\text{eff}(k,k')}{\Psi(k')}\Psi(k)$$
 \begin{alignat*}{4}
+&& X = g(k,k')\frac{V_\text{eff}(k,k')}{\Psi(k')}\Psi(k)  &&\ \ =\ \ && &\frac{4k^4}{(k^2+k '^2) ^2}\frac{V_\text{eff}(k,k')}{\Psi(k')}\Psi(k) \\
 \text{Teil 1:}\qquad 	&&  \int\limits_{0}^{\infty} \Psi(k ')V_\text{eff}(k,k')-X \,dk' && \ \ = \ \ &&
 											&\int\limits_{0}^{\infty} V_\text{eff}(k,k')\left [\Psi(k ')-\frac{4k^4}{(k^2+k '^2)^2}\Psi(k)\right ]\,dk'  \\ 
 \text{Teil 2:}\qquad 	&& 	\int\limits_{0}^{\infty} \Psi(k ')V_\text{eff}(k,k')X   && \ \ = \ \ &&
 											&\Psi(k)\int\limits_{0}^{\infty} \frac{4k^4}{(k^2+k '^2)^2}V_\text{eff}(k,k')\,dk'
 \end{alignat*}
-In Hinblick auf die numerische Behandlung muss Teil 2 noch weiter analysiert werden, während Teil 1 schon diskretisiert werden kann. Schlussendlich ergibt sich auf diese Weise ein Eigenwertproblem, welches die Exzitonenenergien liefert. 
+In Hinblick auf die numerische Behandlung muss Teil 2 noch weiter analysiert werden, während Teil 1 schon diskretisiert werden kann. Dazu löst man den Betrag im Logarithmus auf und integriert partiell, sodass sich ein einfaches Integral bildet, welches sich aufteilt in Logarithmen und einen Arkustangens.
 \begin{alignat*}{2}
 \int\limits_{0}^{\infty} \frac{4k^4}{(k^2+k '^2)^2}V_\text{eff}(k,k')\,dk' 
 						&& \ \ &=\ \ \int\limits_{0}^{\infty} \frac{4k^4}{(k^2+k '^2)^2}\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}\,dk' \\
+%
+%						Hier kommen Gleichungen aus untenstehendem Kommmentar rein
+%
+						&& \ \ &=\ \ 	k\Big[\underbrace{\ln\left (\frac{1+u}{1-u}\right )}_{\rightarrow 0 \text{ für } u\rightarrow \infty}+\, 2\arctan{u}\Big]_{0}^{\infty}\\  
+						&& \ \ &=\ \ 	\pi k
+\end{alignat*}
+\begin{comment}
+%
+%					Diese Zeilen sind die explizite Rechnung des Integrals oben
+%
 						&& \ \ &=\ \ 	k\int\limits_{0}^{\infty} \frac{4u}{(1+u^2)^2}\ln{\left |\frac{1 + u}{1-u}\right |}\,du \qquad\text{Betrag auflösen}\\
 						&& \ \ &=\ \ 	k\int\limits_{0}^{1} \left (\frac{-2}{1+u^2}\right )'\ln{\left (\frac{1 + u}{1-u}\right )}\,du + k\int\limits_{1}^{\infty} \left( \frac{-2}{1+u^2}\right )'\ln{\left (\frac{1 + u}{u-1}\right )}\,du\\
 						&& \ \ &\stackrel{\text{P.I.}}{=}\ \ \underbrace{k\left (\frac{-2}{1+u^2}\right )\ln{\left ( \frac{1 + u}{1-u}\right )}\Big |_{0}^{1}+k\left (\frac{-2}{1+u^2}\right )\ln{\left ( \frac{1 + u}{u-1}\right )}\Big |_{1}^{\infty}}_{\text{C.H.}\,\rightarrow \,0}
@@ -69,11 +85,23 @@ In Hinblick auf die numerische Behandlung muss Teil 2 noch weiter analysiert wer
 						&& \ \ &=\ \ 	k\int\limits_{0}^{\infty} \frac{4}{(1-u^4)}\,du  \\
 						&& \ \ &=\ \ 	k\int\limits_{0}^{\infty} \left (\frac{1}{1-u}+\frac{1}{1+u}+\frac{2}{1+u^2}\right )\,du\\
 						&& \ \ &=\ \ 	k\Big[-\ln{(1-u)}+\ln{(1+u)}+ 2\arctan{u}\Big]_{0}^{\infty}\\  
-						&& \ \ &=\ \ 	k\Big[\underbrace{\ln\left (\frac{1+u}{1-u}\right )}_{\rightarrow 0 \text{ für } u\rightarrow \infty}+\, 2\arctan{u}\Big]_{0}^{\infty}\\  
-						&& \ \ &=\ \ 	\pi k
-\end{alignat*}
+%
+\end{comment}
+
 Damit ergibt sich nun: 
-\begin{alignat*}{2}
-a
+\begin{alignat*}{1}
+	&-\dfrac{e^2}{4\pi ^2 \epsilon_0} \Big [\int\limits_{0}^{\infty} V_\text{eff}(k,k')\left [\Psi(k ')-g(k,k')\Psi(k)\right ]\,dk'  
++  \Psi(k)\int\limits_{0}^{\infty} g(k,k')V_\text{eff}(k,k')\,dk' \Big]   \\
+= 	\qquad &-\dfrac{e^2}{4\pi^2 \epsilon_0} \int\limits_{0}^{\infty} V_\text{eff}(k,k')\left [\Psi(k ')-g(k,k')\Psi(k)\right ]\,dk' 
+-  \dfrac{e^2}{4\pi \epsilon_0}  k\Psi(k) 
+\end{alignat*}
+Die Diskretisierung des Problems hat somit die Form: 
+\begin{alignat*}{3}
+\sum\limits_{k'}H_{kk'}\Psi_{k'} = E \Psi_k && \qquad \text{  wobei}\qquad && &H_{kk'}= 
+	 \begin{cases}
+     V_{kk'}  &k \neq k' \\
+     \frac{\hbar ^2 k^2}{2\mu} -\frac{e^2}{4\pi \epsilon_0}k +\sum\limits_{k\neq k'}\frac{4k^4}{(k^2+k '^2)^2}V_{kk'} &k=k'
+   \end{cases}\\
+  &&  && &V_{kk'} = V_\text{eff}(k,k')=\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}
 \end{alignat*}
 \subsection{Lösen des 2D Problems}
