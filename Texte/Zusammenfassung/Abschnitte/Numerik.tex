@@ -105,3 +105,43 @@ Die Diskretisierung des Problems hat somit die Form:
   &&  && &V_{kk'} = V_\text{eff}(k,k')=\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}
 \end{alignat*}
 \subsection{Lösen des 2D Problems}
+Das Vorgehen beim 2D Problem ist völlig analog zur Lösung in 3 Dimensionen. Einzig unterschiedlich ist die Lösbarkeit der Integrale, welche nur numerisch ausgewertet werden können. Angefangen wird erneut mit der Fouriertransformation des Coulombpotentials, welche die folgende Form besitzt: 
+\begin{alignat*}{1} 
+\mathcal{F}[V(r)](k)=-\frac{e^2}{2\varepsilon_0 V}\frac{1}{|\Vk|}\eqqcolon \widetilde{V}(k)
+\end{alignat*}
+Natürlich gilt für die Fouriertransformation der Schrödigergleichung eines isotropen Problems: 
+\begin{alignat*}{2}
+\left [-\frac{\hbar^2}{2\mu}\nabla ^2 + V(r)\right ]\Psi(\vec{r}) &= E\, \Psi(\vec{r}) \ \ \leftrightarrow \ \ \left [\frac{\hbar^2k^2}{2\mu}-E  \right ]\Psi(k) = \frac{V}{4\pi ^2} \int  \widetilde{V}(k-k')\Psi(k ') d^2 k'
+\end{alignat*}
+Das Faltungsintegral hat hierbei die Form: 
+\begin{alignat*}{2}
+\frac{V}{4\pi ^2} \int  \widetilde{V}(k-k')\Psi(\Vk ') d^2 k' 
+		&& \ \ &= \ \ -\frac{e^2}{8\pi^2\varepsilon_0} \int  \frac{1}{|\Vk -\Vk '|}\Psi(k ') d^2 k' \\
+		&& \ \ &= \ \ -\frac{e^2}{8\pi^2\varepsilon_0} \int\limits_{0}^{\infty}\int\limits_{0}^{2\pi}  \frac{k'}{\sqrt{k^2+k'^2-2kk'\cos(\varphi)}}\Psi(k ') d\varphi dk' \\
+		&& \ \ &= \ \ \int\limits_{0}^{\infty}V_\text{eff}(k,k')\Psi(k ') dk' \\
+\text{wobei}\qquad V_\text{eff}(k,k') &&  \ \ &= \ \ 		-\frac{e^2}{8\pi^2\varepsilon_0}\int\limits_{0}^{2\pi}  \frac{k'}{\sqrt{k^2+k'^2-2kk'\cos(\varphi)}} d\varphi
+\end{alignat*}
+Da das Integral über die Winkelkoordinate nun nicht mehr trivial zu lösen ist, hängt das effektive Potential $V_\text{eff}$ noch direkt von diesem ab. Wieder ergeben sich Schwierigkeiten an den Stellen, an denen der Integrand divergiert. Dies ist insbesondere der Fall, wenn $k=k'$ und $\varphi = 0$ gilt. Um dieses Problem zu lösen, wird der Faltungsausdruck erneut mithilfe des konvergenzerzeugenden Faktors $g(k,k')$  umgeschrieben: 
+\begin{alignat*}{1}
+g(k,k') \ \ &= \ \ \frac{4k^4}{(k^2+k '^2)^2} \\ 
+\int\limits_{0}^{\infty}V_\text{eff}(k,k')\Psi(k ') dk' 
+&=\underbrace{ \int\limits_{0}^{\infty}V_\text{eff}(k,k')\left [\Psi(k ')-g(k,k')\Psi(k)\right ] dk'}_{\text{Teil 1}} +\Psi(k) 
+\underbrace{\int\limits_{0}^{\infty}g(k,k')V_\text{eff}(k,k')dk'}_{\text{Teil 2}}
+\end{alignat*}
+Es zeigt sich, dass der Integrand in Teil 2 dimensionslos dargestellt werden kann, woraus sich der Vorteil ergibt, dass dieses Integral unabhängig von $k$ oder $k'$ auf einem feinen $\varphi$-Gitter bestimmt werden kann. Es gilt: 
+\begin{alignat*}{2}
+\int\limits_{0}^{\infty}g(k,k')V_\text{eff}(k,k')dk' 
+		&& \ \ &= \ \ \underbrace{-\frac{e^2}{8\pi^2\varepsilon_0}}_{\coloneqq \,c} 
+		\int\limits_{0}^{\infty}\frac{4k^4}{(k^2+k '^2)^2}\int\limits_{0}^{2\pi}  \frac{k'}{\sqrt{k^2+k'^2-2kk'\cos(\varphi)}} d\varphi dk' \\
+		&&\ \ &= \ \ c\cdot k \int\limits_{0}^{\infty}\int\limits_{0}^{2\pi} \frac{4u}{(1+u^2)^2\sqrt{1+u^2-2u\cos(\varphi)}} d\varphi du\\ 
+		&&\ \ &= \ \ -\frac{e^2}{8\pi^2\varepsilon_0} k I
+\end{alignat*}
+Da $I$ konvergiert und damit numerisch zu bestimmen ist, folgt für die Diskretisierung des Problems die identische Darstellung wie in 3 Dimensionen:
+\begin{alignat*}{3}
+\sum\limits_{k'}H_{kk'}\Psi_{k'} = E \Psi_k && \qquad \text{  wobei}\qquad && &H_{kk'}= 
+	 \begin{cases}
+     V_{kk'}  &k \neq k' \\
+     \frac{\hbar ^2 k^2}{2\mu} -\frac{e^2}{8\pi^2\varepsilon_0} k I +\sum\limits_{k\neq k'}\frac{4k^4}{(k^2+k '^2)^2}V_{kk'} &k=k'
+   \end{cases}\\
+  &&  && &V_{kk'} = V_\text{eff}(k,k')=-\frac{e^2}{8\pi^2\varepsilon_0}\int\limits_{0}^{2\pi}  \frac{k'}{\sqrt{k^2+k'^2-2kk'\cos(\varphi)}} d\varphi
+\end{alignat*}
