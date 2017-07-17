@@ -62,11 +62,18 @@ In Hinblick auf die numerische Behandlung muss Teil 2 noch weiter analysiert wer
 \begin{alignat*}{2}
 \int\limits_{0}^{\infty} \frac{4k^4}{(k^2+k '^2)^2}V_\text{eff}(k,k')\,dk' 
 						&& \ \ &=\ \ \int\limits_{0}^{\infty} \frac{4k^4}{(k^2+k '^2)^2}\frac{k '}{k}\ln{\left |\frac{k + k '}{k-k'}\right |}\,dk' \\
-						&& \ \ &=\ \ 	\int\limits_{0}^{\infty} \frac{4u}{(1+u^2)^2}\ln{\left |\frac{1 + u}{1-u}\right |}\,du \\
-						&& \ \ &=\ \ 	\int\limits_{0}^{\infty} \left (\frac{-2}{(1+u^2)}\right )'\ln{\left |\frac{1 + u}{1-u}\right |}\,du \\
-						&& \ \ &\stackrel{\text{P.I.}}{=}\ \ \underbrace{\left (\frac{-2}{(1+u^2)}\right )\ln{\left | \frac{1 + u}{1-u}\right |}\Big |_{0}^{\infty}}_{=\,0}
-						+\int\limits_{0}^{\infty} \left (\frac{-2}{(1+u^2)}\right )\frac{1 - u}{1+u}\frac{2}{(1-u)^2}\,du \\
-						&& \ \ &=\ \ 	\int\limits_{0}^{\infty} \frac{4}{(1-u^4)}\,du  \\
-						&& \ \ &=\ \ 	\int\limits_{0}^{\infty} \left (\frac{1}{1-u}+\frac{1}{1+u}\right )+\frac{1}{1+u^2}\,du  
+						&& \ \ &=\ \ 	k\int\limits_{0}^{\infty} \frac{4u}{(1+u^2)^2}\ln{\left |\frac{1 + u}{1-u}\right |}\,du \qquad\text{Betrag auflösen}\\
+						&& \ \ &=\ \ 	k\int\limits_{0}^{1} \left (\frac{-2}{1+u^2}\right )'\ln{\left (\frac{1 + u}{1-u}\right )}\,du + k\int\limits_{1}^{\infty} \left( \frac{-2}{1+u^2}\right )'\ln{\left (\frac{1 + u}{u-1}\right )}\,du\\
+						&& \ \ &\stackrel{\text{P.I.}}{=}\ \ \underbrace{k\left (\frac{-2}{1+u^2}\right )\ln{\left ( \frac{1 + u}{1-u}\right )}\Big |_{0}^{1}+k\left (\frac{-2}{1+u^2}\right )\ln{\left ( \frac{1 + u}{u-1}\right )}\Big |_{1}^{\infty}}_{\text{C.H.}\,\rightarrow \,0}
+						+k\int\limits_{0}^{\infty} \frac{2}{1+u^2}\frac{1 - u}{1+u}\frac{2}{(1-u)^2}\,du \\
+						&& \ \ &=\ \ 	k\int\limits_{0}^{\infty} \frac{4}{(1-u^4)}\,du  \\
+						&& \ \ &=\ \ 	k\int\limits_{0}^{\infty} \left (\frac{1}{1-u}+\frac{1}{1+u}+\frac{2}{1+u^2}\right )\,du\\
+						&& \ \ &=\ \ 	k\Big[-\ln{(1-u)}+\ln{(1+u)}+ 2\arctan{u}\Big]_{0}^{\infty}\\  
+						&& \ \ &=\ \ 	k\Big[\underbrace{\ln\left (\frac{1+u}{1-u}\right )}_{\rightarrow 0 \text{ für } u\rightarrow \infty}+\, 2\arctan{u}\Big]_{0}^{\infty}\\  
+						&& \ \ &=\ \ 	\pi k
+\end{alignat*}
+Damit ergibt sich nun: 
+\begin{alignat*}{2}
+a
 \end{alignat*}
 \subsection{Lösen des 2D Problems}
