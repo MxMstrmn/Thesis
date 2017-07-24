@@ -1,0 +1,13 @@
+
+Input   = struct( 'I_k',   [0 1 10 100], 'N_k',   [10 10 10], ...
+                  'I_phi', [-pi pi],     'N_phi',  50 ); 
+
+[X , hw]  = Exzitonenanregung(Input,'Spektrum',  'Coulomb',-700:50) ; 
+[EW, ~ ]  = Exzitonenanregung(Input,'Eigenwerte','Coulomb',-700:50) ; 
+
+plot(hw,X/max(X),'r'); hold on
+stem(EW(EW<0), ones(1, length(EW(EW<0))), 'r:', 'markeredgecolor', 'none')
+
+xlim([0 150])   ;   xlabel('$E-E_G$ in meV','interpreter','latex');
+ylim([0 0.025]) ;   ylabel('Absorbtion Im$\Chi$','interpreter','latex')
+ 
