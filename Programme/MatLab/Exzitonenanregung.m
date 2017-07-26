@@ -23,7 +23,7 @@ dim                 = length(k) ;
  kk                 =  K(:,:,1) ;
 weight_k            = repmat(g_k',[dim, 1]) ;
 
-% Integration über Phi für beliebige Funnktionen F(k,k',phi)
+% Integration über Phi fuer beliebige Funnktionen F(k,k',phi)
 weight_phi          = permute(repmat(g_phi,[1,dim,dim]),[3,2,1]) ;
 PHIntegrate         = @(k,k1,phi,fcn)  sum((fcn(k,k1,phi) .* weight_phi), 3) ;
 
