@@ -20,3 +20,12 @@ CONST(1).E_G        = 0;                                            % Bandlücke
 
 S = CONST;  
 end
+
+% Eventuell nuetzlich fuer MX gerechnet mit Einheiten
+%
+% const       = constants ;
+% h           = const.hbar ;                                      
+% B           = 1; 
+% mu          = (0.46*const.me*0.41) /(0.46+0.41);                % m*e=0.46me, m*h=0.41me  
+% w_c         = ( const.e*B)/mu ;                                 % Zykloronfrequnez des Exzitons
+% coulomb     = (-const.e^2) /(4*pi*const.eps*const.eps0) ;       % Coulomb Vorfaktor

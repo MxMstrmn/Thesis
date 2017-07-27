@@ -1,4 +1,4 @@
-function [out1, out2] = Exzitonenanregung(Input,Method,Potential,Energies) 
+function [out1, out2] = Exziton_EX(Input,Method,Potential,Energies) 
 % Konstanten bestimmen
 c                   = constants ; 
 me                  = 0.46*c.me ;
@@ -6,7 +6,7 @@ mh                  = 0.41*c.me ;
 mu                  = (me*mh)/(me+mh) ;
 C                   = - (c.e^2)/(8*pi^2*c.eps0*c.eps) ; 
 
-% Dimension der k Matrix und Stützstellen für das phi-Intergral muss in
+% Dimension der k Matrix und Stï¿½tzstellen fï¿½r das phi-Intergral muss in
 % Input Struktur gespeichert sein.
 % z.B.:
 %    Input = struct('I_k',  [0 1 10 100],   'N_k',  [10 10 10], ...
@@ -31,7 +31,7 @@ PHIntegrate         = @(k,k1,phi,fcn)  sum((fcn(k,k1,phi) .* weight_phi), 3) ;
 % veff              : Integrand in Veff(k,k'); Veff(k,k') = veff dphi in [0,2pi] 
 % veff_ii           : Integrand in Diagonalelementen
 % veff_ij           : Integrand in Nicht-Diagonalelementen
-% t_ii              : Funktion für kinetische Energie 
+% t_ii              : Funktion fï¿½r kinetische Energie 
 
 g_c                 = @(k,k1)       4*k.^4 ./(k.^2 +k1.^2).^2 ;
 switch Potential

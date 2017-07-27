@@ -1,6 +1,5 @@
 
 figure
-
 EXMX      = 'MX' ; 
 
 switch EXMX
@@ -9,8 +8,8 @@ switch EXMX
         Input_ex    = struct(   'I_k',   [0 1 10 100 1000 10000], 'N_k',   [10 10 10 10 10], ...
                                 'I_phi', [-pi pi],                'N_phi',  50 ) ; 
         %==================================================================================
-        [X , hw]    = Exzitonenanregung(Input_ex,'Spektrum',  'Coulomb',-700:50) ; 
-        [EW, ~ ]    = Exzitonenanregung(Input_ex,'Eigenwerte','Coulomb',-700:50) ; 
+        [X , hw]    = Exziton_EX(Input_ex,'Spektrum',  'Coulomb',-700:50) ; 
+        [EW, ~ ]    = Exziton_EX(Input_ex,'Eigenwerte','Coulomb',-700:50) ; 
 
         plot_i      = plot(hw, imag(X)/max(imag(X)), 'r',                'linewidth', 2.5) ; hold on
         stem_i      = stem(EW(EW<0), ones(1, length(EW(EW<0))), 'r--',   'linewidth', 1.3, ... 
@@ -29,8 +28,8 @@ switch EXMX
         ax          = subplot(3,2,i);  
         Input_mx    = struct( 'n',300, 'lambda',lambda(i), 'phi',phi ) ;                 
         
-        [X , hw]    = Magnetoexziton(Input_mx,'Spektrum',  'Coulomb') ;
-        [EW, ~ ]    = Magnetoexziton(Input_mx,'Eigenwerte','Coulomb') ;
+        [X , hw]    = Exziton_MX(Input_mx,'Spektrum',  'Coulomb') ;
+        [EW, ~ ]    = Exziton_MX(Input_mx,'Eigenwerte','Coulomb') ;
         
         plot_i      = plot(ax,hw, imag(X)/max(imag(X)), 'r',    'linewidth', 2.5) ; hold on
         stem_i      = stem(ax,EW, ones(1, length(EW)), 'r--',   'linewidth', 1.3, ...
@@ -50,5 +49,4 @@ switch EXMX
         legend(plot_i,['\lambda = ' num2str(lambda(i))],'interpreter','latex');
         end
 end
-
- 
+set(gcf, 'Position', [100, 100, 750, 900])

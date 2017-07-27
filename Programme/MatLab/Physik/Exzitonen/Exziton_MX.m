@@ -1,4 +1,4 @@
-function [out1, out2] = Magnetoexziton(Input,Method,Potential) 
+function [out1, out2] = Exziton_MX(Input,Method,Potential) 
 
 [n, lambda, phi]    = deal(Input.n, Input.lambda, Input.phi) ;
 dim                 = n+1 ; 
@@ -7,7 +7,7 @@ dim                 = n+1 ;
 switch Potential
     case 'Coulomb'
         const       =     (2*lambda/pi)^0.5 ;                            
-        VC_ij       = @(n) - const *exp(gamma_prefactor(0:n)) .*F32(0:n) ;
+        VC_ij       = @(n) - const *exp(gammaPrefactor(0:n)) .*F32(0:n) ;
     case 'Keldysh'
 end
 
@@ -30,7 +30,7 @@ switch Method
         out1        = X ;
         out2        = phi ;
     case 'Eigenwerte'
-         disp('Eigenwerte')
+%          disp('Eigenwerte')
         % Bestimmung der Eigenwerte (eig_val) samt Normierung der Wellenfunktionen
         % (states). Beides beginnend mit dem Grundzustand (sort).
         [states, EW]   = eig(H,'vector');
@@ -43,7 +43,7 @@ switch Method
         for i=1:length(EW); states(:,i) = states(:,i)*1/norm(i)*sign(states(1,i)); end
          
         % Anzeigen der Grundzustandsenergie
-        disp(EW(1))
+%         disp(EW(1))
         out1            = EW ;
         out2            = states ;
 end
