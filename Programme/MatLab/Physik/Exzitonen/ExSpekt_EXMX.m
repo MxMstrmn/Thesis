@@ -20,13 +20,14 @@ switch EXMX
         grid on;                    set(gca,'GridLineStyle', '--', 'fontsize',13);
     case 'MX'
         %==================================
+        n           = 20 ; 
         lambda      = [0.25 0.5 1 2 4 8]  ; 
         phi         = linspace(-8,20,500) ;
         %==================================
         
         for i=1:6   
         ax          = subplot(3,2,i);  
-        Input_mx    = struct( 'n',300, 'lambda',lambda(i), 'phi',phi ) ;                 
+        Input_mx    = struct( 'n',n, 'lambda',lambda(i), 'phi',phi ) ;                 
         
         [X , hw]    = Exziton_MX(Input_mx,'Spektrum',  'Coulomb') ;
         [EW, ~ ]    = Exziton_MX(Input_mx,'Eigenwerte','Coulomb') ;
