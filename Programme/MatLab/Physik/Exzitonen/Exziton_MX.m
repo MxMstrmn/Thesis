@@ -7,18 +7,24 @@ dim                 = n+1 ;
 switch Potential
     case 'Coulomb'
         const       =     (2*lambda/pi)^0.5 ;                            
-%         VC_ij       = @(n) - const *exp(gammaPrefactor(0:n)) .*F32(0:n) ;
-        VC_ij       = @(n) -const*V_ij_Num(0:n);
+%         V_ij       = @(n) - const *exp(gammaPrefactor(0:n)) .*F32(0:n) ;
+        V_ij       = @(n) -const*V_ij_Num(0:n);
 
 % imagesc(exp(gammaPrefactor(0:20)) .*F32(0:20)./V_ij_Num(0:20)) %
 % Vergleich
     case 'Keldysh'
+        try 
+            disp('Keldysh')
+            V_ij   =@(n) csvread(['VK_ij_' num2str(max(n)) '.dat']);
+        catch
+            disp('Berechne Matrix mit gaussLaguerre.m')
+        end
 end
 
 Hmx_ii      = @(n)      diag     (  lambda*(2*(0:n)+1) ) ;
 Inh_ii      = @(n,phi)  eye(dim)*( -phi    -1i*0.2     ) ;      
 
-H           = Hmx_ii(n) + VC_ij(n) ;
+H           = Hmx_ii(n) + V_ij(n) ;
 
 
 switch Method

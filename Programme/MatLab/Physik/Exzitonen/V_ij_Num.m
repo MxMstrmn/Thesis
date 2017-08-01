@@ -1,6 +1,6 @@
 function V = V_ij_Num(n)
 try 
-    V   = csvread(['VC_ij_' num2str(max(n+1)) '.dat']);
+    V   = csvread(['VC_ij_' num2str(max(n)) '.dat']);
 catch
     disp('Berechne Matrix mit gaussLaguerre.m')
 % % %     

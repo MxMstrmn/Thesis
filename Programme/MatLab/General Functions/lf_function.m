@@ -87,6 +87,9 @@ function v = lf_function ( m, n, alpha, x )
                 +  (   - i + 1 - alpha            )  * v(1:m,i-1) ) ...
                   /      i;
   end
-
+  
+  % Returns only highest order; should all orders be returned comment out the next line 
+  v = v(:,end);  
+  
   return
 end

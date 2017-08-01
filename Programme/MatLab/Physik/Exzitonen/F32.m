@@ -9,7 +9,7 @@ catch
     for ii=n
         for jj=0:ii
             % hypgeomNum() zeigt im Bereich n=0:300 eine max. Abweichung von
-            % 0.05% gegen�ber hypergeom()
+            % 0.05% gegenueber hypergeom()
             A(jj+1,ii+1) = hypgeomNum([-jj ii-jj+0.5 0.5],[ii-jj+1 -jj+0.5],1);
             A(ii+1,jj+1) = A(jj+1,ii+1);
         end
