@@ -20,7 +20,7 @@ switch EXMX
         grid on;                    set(gca,'GridLineStyle', '--', 'fontsize',13);
     case 'MX'
         %==================================
-        n           = 20 ; 
+        n           = 169 ; 
         lambda      = [0.25 0.5 1 2 4 8]  ; 
         phi         = linspace(-8,20,500) ;
         %==================================

@@ -30,23 +30,23 @@ function gen_laguerre_rule ( order, alpha, a, b, filename )
 %
   time_stamp ( );
   fprintf ( 1, '\n' );
-  fprintf ( 1, 'GEN_LAGUERRE_RULE\n' );
-  fprintf ( 1, '  MATLAB version\n' );
-  fprintf ( 1, '\n' );
-  fprintf ( 1, '  Compute a generalized Gauss-Laguerre rule for approximating\n' );
-  fprintf ( 1, '    Integral ( a <= x < oo ) |x-a|^ALPHA exp(-B*(x-a)) f(x) dx\n' );
-  fprintf ( 1, '  of order ORDER.\n' );
-  fprintf ( 1, '\n' );
-  fprintf ( 1, '  The user specifies ORDER, ALPHA, A, B, and FILENAME.\n' );
-  fprintf ( 1, '\n' );
-  fprintf ( 1, '  ORDER is the number of points.\n' );
-  fprintf ( 1, '  ALPHA is the exponent of |X|.\n' );
-  fprintf ( 1, '  A is the left endpoint (typically 0).\n' );
-  fprintf ( 1, '  B is the exponential scale factor (typically 1).\n' );
-  fprintf ( 1, '  FILENAME is used to generate 3 files:\n' );
-  fprintf ( 1, '  * filename_w.txt - the weight file\n' );
-  fprintf ( 1, '  * filename_x.txt - the abscissa file.\n' );
-  fprintf ( 1, '  * filename_r.txt - the region file.\n' );
+%   fprintf ( 1, 'GEN_LAGUERRE_RULE\n' );
+%   fprintf ( 1, '  MATLAB version\n' );
+%   fprintf ( 1, '\n' );
+%   fprintf ( 1, '  Compute a generalized Gauss-Laguerre rule for approximating\n' );
+%   fprintf ( 1, '    Integral ( a <= x < oo ) |x-a|^ALPHA exp(-B*(x-a)) f(x) dx\n' );
+%   fprintf ( 1, '  of order ORDER.\n' );
+%   fprintf ( 1, '\n' );
+%   fprintf ( 1, '  The user specifies ORDER, ALPHA, A, B, and FILENAME.\n' );
+%   fprintf ( 1, '\n' );
+%   fprintf ( 1, '  ORDER is the number of points.\n' );
+%   fprintf ( 1, '  ALPHA is the exponent of |X|.\n' );
+%   fprintf ( 1, '  A is the left endpoint (typically 0).\n' );
+%   fprintf ( 1, '  B is the exponential scale factor (typically 1).\n' );
+%   fprintf ( 1, '  FILENAME is used to generate 3 files:\n' );
+%   fprintf ( 1, '  * filename_w.txt - the weight file\n' );
+%   fprintf ( 1, '  * filename_x.txt - the abscissa file.\n' );
+%   fprintf ( 1, '  * filename_r.txt - the region file.\n' );
 %
 %  Initialize the parameters.
 %
@@ -104,12 +104,12 @@ function gen_laguerre_rule ( order, alpha, a, b, filename )
 %
 %  Input summary.
 %
-  fprintf ( 1, '\n' );
-  fprintf ( 1, '  ORDER = %d\n', order );
-  fprintf ( 1, '  ALPHA = %f\n', alpha );
-  fprintf ( 1, '  A = %f\n', a );
-  fprintf ( 1, '  B = %f\n', b );
-  fprintf ( 1, '  FILENAME = "%s".\n', filename );
+%   fprintf ( 1, '\n' );
+%   fprintf ( 1, '  ORDER = %d\n', order );
+%   fprintf ( 1, '  ALPHA = %f\n', alpha );
+%   fprintf ( 1, '  A = %f\n', a );
+%   fprintf ( 1, '  B = %f\n', b );
+%   fprintf ( 1, '  FILENAME = "%s".\n', filename );
 %
 %  Construct the rule.
 %
@@ -125,9 +125,9 @@ function gen_laguerre_rule ( order, alpha, a, b, filename )
 %
 %  Terminate.
 %
-  fprintf ( 1, '\n' );
-  fprintf ( 1, 'GEN_LAGUERRE_RULE:\n' );
-  fprintf ( 1, '  Normal end of execution.\n' );
+%   fprintf ( 1, '\n' );
+%   fprintf ( 1, 'GEN_LAGUERRE_RULE:\n' );
+%   fprintf ( 1, '  Normal end of execution.\n' );
   fprintf ( 1, '\n' );
   time_stamp ( );
 

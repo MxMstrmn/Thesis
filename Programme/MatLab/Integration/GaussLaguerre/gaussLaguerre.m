@@ -1,21 +1,35 @@
 formatSpec  = '%f';
+dim         = 171 ;
+VC_ij       = zeros(dim+1) ;
 
-% Parameter
-n           = 5;
-n1          = 6; 
-setGlobalx(n)  ; 
-setGlobalx(n1) ; 
-beta        = n1-n-0.5 ;  
+for jj=0:dim
+    for ii = 0:jj
+        n           = ii;
+        n1          = jj;
+        setGlobaln(n)  ;
+        setGlobaln1(n1) ;
+        beta        = n1-n-0.5 ;
+        
+        gen_laguerre_rule(n+1,beta,0,1,'fcn')
+        
+        H           = fscanf(fopen('fcn_w.txt','r'),formatSpec);
+        ak          = fscanf(fopen('fcn_x.txt','r'),formatSpec);
+        Int         = fscanf(fopen('fcn_r.txt','r'),formatSpec);
+        
+        const       = sqrt(pi)*factorial(n)/factorial(n1);
+        
+        GAUSSLAGUERRE       = const*(H.'*fcn(ak));
+        fprintf('\n GAUSSLAGUERRE = %0.4g \n',GAUSSLAGUERRE)
+        
+        VC_ij(ii+1,jj+1)    = GAUSSLAGUERRE ; 
+        VC_ij(jj+1,ii+1)    = VC_ij(ii+1,jj+1) ; 
+        
+        fclose all;
+    end
+end
 
-gen_laguerre_rule(n+1,beta,0,1,'fcn')
 
-H           = fscanf(fopen('fcn_w.txt','r'),formatSpec);
-ak          = fscanf(fopen('fcn_x.txt','r'),formatSpec);
-Int         = fscanf(fopen('fcn_r.txt','r'),formatSpec);
 
-const       = sqrt(pi)*factorial(n)/factorial(n1); 
-
-GAUSSLAGUERRE   = const*(H.'*fcn(ak))
 
 % FCN             = @(x) x.^beta.*exp(-x).*fcn(x(:)) ;
 % QUAD            = const*quad(FCN,0,200) 

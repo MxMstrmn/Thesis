@@ -5,13 +5,12 @@ function out = fcn(x)
 L   = @(n,a,x)    lf_function(length(x),n,a,x(:));
 f   = @(n,a,x)    (L(n,a,x)).^2 ;
 
-% n   = getGlobal n  ; 
-% n1  = getGlobal n1 ; 
-n  = getGlobalx ;
-n1 = 5 ; 
-out = f(n,n1-n,x);
+
+n  = getGlobaln ;
+n1 = getGlobaln1 ; 
+out = f(n+1,n1-n,x);
 % lf_function gibt die Werte für alle Ordnungen der Laguerre Pol aus
-out = out(:,n);
+out = out(:,n+1);
 end
 
 % FCN =@(x) x.^0.5.*exp(-x).*fcn(x)

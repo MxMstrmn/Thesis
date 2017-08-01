@@ -7,8 +7,8 @@ dim                 = n+1 ;
 switch Potential
     case 'Coulomb'
         const       =     (2*lambda/pi)^0.5 ;                            
-        VC_ij       = @(n) - const *exp(gammaPrefactor(0:n)) .*F32(0:n) ;
-%         VC_ij       =@(n) -const*V_ij_Num(0:n);
+%         VC_ij       = @(n) - const *exp(gammaPrefactor(0:n)) .*F32(0:n) ;
+        VC_ij       = @(n) -const*V_ij_Num(0:n);
 
 % imagesc(exp(gammaPrefactor(0:20)) .*F32(0:20)./V_ij_Num(0:20)) %
 % Vergleich
