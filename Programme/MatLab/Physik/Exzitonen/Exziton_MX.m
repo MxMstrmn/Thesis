@@ -1,21 +1,31 @@
-function [out1, out2] = Exziton_MX(Input,Method,Potential) 
+function [out1, out2] = Exziton_MX(Input,Output,Potential,Method) 
+
+ if (  nargin < 4 )
+%   Unitl now only numerical computation of the Keldysh matrix possible   
+    Method = 'Num' ; 
+ end
+
 
 [n, lambda, phi]    = deal(Input.n, Input.lambda, Input.phi) ;
 dim                 = n+1 ; 
-
+const               = (2*lambda/pi)^0.5 ;
 
 switch Potential
     case 'Coulomb'
-        const       =     (2*lambda/pi)^0.5 ;                            
-%         V_ij       = @(n) - const *exp(gammaPrefactor(0:n)) .*F32(0:n) ;
-        V_ij       = @(n) -const*V_ij_Num(0:n);
+        switch Method
+            case 'Ana'
+                V_ij    = @(n) - const *exp(gammaPrefactor(0:n)) .*F32(0:n) ;
+            case 'Num'
+                V_ij    = @(n) - const *V_ij_Num(0:n);
+        end 
 
 % imagesc(exp(gammaPrefactor(0:20)) .*F32(0:20)./V_ij_Num(0:20)) %
 % Vergleich
     case 'Keldysh'
         try 
             disp('Keldysh')
-            V_ij   =@(n) csvread(['VK_ij_' num2str(max(n)) '.dat']);
+            V_ij        = @(n) - const *csvread(['VK_ij_' num2str(max(n)) '.dat']);
+            
         catch
             disp('Berechne Matrix mit gaussLaguerre.m')
         end
@@ -27,7 +37,7 @@ Inh_ii      = @(n,phi)  eye(dim)*( -phi    -1i*0.2     ) ;
 H           = Hmx_ii(n) + V_ij(n) ;
 
 
-switch Method
+switch Output
     case 'Spektrum'
         b           = ones (     dim    ,1) ;
         X           = zeros(length(phi) ,1) ;

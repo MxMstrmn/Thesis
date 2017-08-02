@@ -1,23 +1,26 @@
 formatSpec  = '%f';
-dim         = 171 ;
+dim         = 20 ;
 
-Potential   = 'Coulomb' ; 
+Potential   = 'Keldysh' ; 
 
 switch Potential 
     case {'Coulomb'}
         
         fcn     = 'fcn_Coulomb';
         f       = @(x) fcn_Coulomb(x) ;
-        order   = n+1 ;
+        
+%         Für den fall das Keldysh und Coulomb mit unterschiedlich vielen 
+%         Stützstellen konvergien 
+        order   = @(n) n+1 ;
     
     case {'Keldysh'}
         
         fcn     = 'fcn_Keldysh';
         f       = @(x) fcn_Keldysh(x) ; 
-        order   = n+1 ;
+        order   = @(n) n+1 ;
 end
 
-VC_ij       = zeros(dim+1) ;
+V_ij       = zeros(dim+1) ;
 for jj=0:dim
     for ii = 0:jj
         n           = ii;
@@ -26,8 +29,8 @@ for jj=0:dim
         setGlobaln1(n1) ;
         beta        = n1-n-0.5 ;
          
-        
-        gen_laguerre_rule(order,beta,0,1,fcn)
+        disp(['Ordnung ist ' num2str(order(n)) ' bei n=' num2str(n)])
+        gen_laguerre_rule(order(n),beta,0,1,fcn)
         
         H           = fscanf(fopen([fcn '_w.txt'],'r'),formatSpec);
         ak          = fscanf(fopen([fcn '_x.txt'],'r'),formatSpec);
@@ -38,8 +41,8 @@ for jj=0:dim
         GAUSSLAGUERRE       = const*(H.'*f(ak));
         fprintf('\n GAUSSLAGUERRE = %0.4g \n',GAUSSLAGUERRE)
         
-        VC_ij(ii+1,jj+1)    = GAUSSLAGUERRE ; 
-        VC_ij(jj+1,ii+1)    = VC_ij(ii+1,jj+1) ; 
+        V_ij(ii+1,jj+1)    = GAUSSLAGUERRE ; 
+        V_ij(jj+1,ii+1)    = V_ij(ii+1,jj+1) ; 
         
         fclose all;
     end

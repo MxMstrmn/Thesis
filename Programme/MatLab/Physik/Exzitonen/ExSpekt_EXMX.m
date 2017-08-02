@@ -1,6 +1,5 @@
-
-clear all
-clc 
+% clear all
+% clc 
 figure
  
 EXMX      = 'MX' ; 
@@ -23,17 +22,17 @@ switch EXMX
         grid on;                    set(gca,'GridLineStyle', '--', 'fontsize',13);
     case 'MX'
         %==================================
-        n           = 169; 
+        n           = 20; 
         lambda      = [0.25 0.5 1 2 4 8]  ; 
-        phi         = linspace(-8,20,500) ;
+        phi         = linspace(-5,10,1000) ;
         %==================================
         
         for i=1:6   
         ax          = subplot(3,2,i);  
         Input_mx    = struct( 'n',n, 'lambda',lambda(i), 'phi',phi ) ;                 
         
-        [X , hw]    = Exziton_MX(Input_mx,'Spektrum',  'Coulomb') ;
-        [EW, ~ ]    = Exziton_MX(Input_mx,'Eigenwerte','Coulomb') ;
+        [X , hw]    = Exziton_MX(Input_mx,'Spektrum',  'Keldysh','Num') ;
+        [EW, ~ ]    = Exziton_MX(Input_mx,'Eigenwerte','Keldysh','Num') ;
         
         plot_i      = plot(ax,hw, imag(X)/max(imag(X)), 'b',    'linewidth', 2.0) ; hold on
         stem_i      = stem(ax,EW, ones(1, length(EW)), 'b--',   'linewidth', 1.1, ...
