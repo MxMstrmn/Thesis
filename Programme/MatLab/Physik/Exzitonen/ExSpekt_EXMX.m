@@ -3,6 +3,8 @@
 figure
  
 EXMX      = 'MX' ; 
+UNIT      = 'NONE';
+
 
 switch EXMX
     case 'EX'
@@ -23,16 +25,27 @@ switch EXMX
     case 'MX'
         %==================================
         n           = 20; 
-        lambda      = [0.25 0.5 1 2 4 8]  ; 
-        phi         = linspace(-5,10,1000) ;
+        lambda      = [1/4 1/2 1 2 2 8]  ;  
+        phi         = linspace(-5,10,500) ;
+        Potential   = 'Keldysh' ; 
+        Method      = 'Num' ; 
+        EB3D        = 145; 
         %==================================
         
         for i=1:6   
-        ax          = subplot(3,2,i);  
-        Input_mx    = struct( 'n',n, 'lambda',lambda(i), 'phi',phi ) ;                 
+        ax          = subplot(3,2,i);   
+        Input_mx    = {n,lambda(i),phi,Potential,Method};
         
-        [X , hw]    = Exziton_MX(Input_mx,'Spektrum',  'Keldysh','Num') ;
-        [EW, ~ ]    = Exziton_MX(Input_mx,'Eigenwerte','Keldysh','Num') ;
+        
+        
+        [X , hw]    = Exziton_MX(Input_mx{:},'Spektrum') ;
+        [EW, ~ ]    = Exziton_MX(Input_mx{:},'Eigenwerte') ;
+        
+        if strcmp(UNIT,'Si')
+            hw = hw*EB3D;
+            EW = EW*EB3D; 
+        end
+        
         
         plot_i      = plot(ax,hw, imag(X)/max(imag(X)), 'b',    'linewidth', 2.0) ; hold on
         stem_i      = stem(ax,EW, ones(1, length(EW)), 'b--',   'linewidth', 1.1, ...
@@ -41,12 +54,18 @@ switch EXMX
         xlim([min(hw) max(hw)]); ylim([0 1.1]); 
         
         if i<5
-            %set(gca,'XTickLabel',[]); 
-        else; xlabel(ax, '$(\hbar \rm{\omega}- E_G)/E_B$', 'interpreter','latex'); end
+            %set(gca,'XTickLabel',[]);
+        elseif strcmp(UNIT,'SI')
+            xlabel(ax, '$(\hbar \rm{\omega}- E_G)$ in meV', 'interpreter','latex')
+        else
+            xlabel(ax, '$(\hbar \rm{\omega}- E_G)/E_B$', 'interpreter','latex')
+        end
         
         if mod(i,2)==0
-            %set(gca,'YTickLabel',[]);  
-        else; ylabel(ax, 'Im($\rm{\chi}$)', 'interpreter','latex'); end
+            %set(gca,'YTickLabel',[]);
+        else
+            ylabel(ax, 'Im($\rm{\chi}$)', 'interpreter','latex')
+        end
         
         grid(ax,'on'); set(gca,'GridLineStyle', '--', 'fontsize',13);
         legend(plot_i,['\lambda = ' num2str(lambda(i))],'interpreter','latex');

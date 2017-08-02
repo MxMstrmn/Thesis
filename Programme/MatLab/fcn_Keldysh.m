@@ -5,7 +5,7 @@ L   = @(n,a,x)    lf_function(length(x),n,a,x(:));
 
 % Parameter
 A   = 1; 
-B   = A*2*pi*0.066; 
+B   = A*2*pi*6.6; 
 
 % Keldysh function for Gauss-Laguerre Integration
 f   = @(n,a,x)    (L(n,a,x)).^2 ./(A+B*sqrt(2*x(:))) ;

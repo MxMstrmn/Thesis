@@ -1,44 +1,50 @@
-function [out1, out2] = Exziton_MX(Input,Output,Potential,Method) 
+function [out1, out2] = Exziton_MX(n,lambda,phi,Potential,Method,Output) 
 
- if (  nargin < 4 )
-%   Unitl now only numerical computation of the Keldysh matrix possible   
-    Method = 'Num' ; 
- end
-
-
-[n, lambda, phi]    = deal(Input.n, Input.lambda, Input.phi) ;
+disp(['Berechnung: ' Output ' des ' Potential '-Potentials'])
 dim                 = n+1 ; 
-const               = (2*lambda/pi)^0.5 ;
+
+% c                = constants(); 
+% a0               = 1.1016;
+% unitB            = 1/c.e*1e-3 ;   
+% lambda           = a0^2*B*c.e/c.hbar*unitB;
+CONS             = (2*lambda/pi)^0.5 ;
 
 switch Potential
     case 'Coulomb'
         switch Method
             case 'Ana'
-                V_ij    = @(n) - const *exp(gammaPrefactor(0:n)) .*F32(0:n) ;
-            case 'Num'
-                V_ij    = @(n) - const *V_ij_Num(0:n);
+                V_ij    = - CONS *exp(gammaPrefactor(0:n)) .*F32(0:n) ;
+            case 'Num'     
+                try
+                    V_ij        = - CONS *csvread(['VC_ij_' num2str(n) '.dat']);
+                    
+                catch
+                    disp('Berechne Coulomb-Matrix erst mit gaussLaguerre.m')
+                    Output = 'issMatrix' ; 
+                end
+                % Vergleich
+                % imagesc(exp(gammaPrefactor(0:20)) .*F32(0:20)./V_ij_Num(0:20))
         end 
+ 
 
-% imagesc(exp(gammaPrefactor(0:20)) .*F32(0:20)./V_ij_Num(0:20)) %
-% Vergleich
     case 'Keldysh'
         try 
-            disp('Keldysh')
-            V_ij        = @(n) - const *csvread(['VK_ij_' num2str(max(n)) '.dat']);
+            V_ij        =  - CONS *csvread(['VK_ij_' num2str(n) '.dat']);
             
         catch
-            disp('Berechne Matrix mit gaussLaguerre.m')
+            disp('Berechne Keldysh-Matrix erst mit gaussLaguerre.m')
+            Output = 'issMatrix' ;
         end
 end
 
 Hmx_ii      = @(n)      diag     (  lambda*(2*(0:n)+1) ) ;
 Inh_ii      = @(n,phi)  eye(dim)*( -phi    -1i*0.2     ) ;      
 
-H           = Hmx_ii(n) + V_ij(n) ;
 
 
 switch Output
     case 'Spektrum'
+        H           = Hmx_ii(n) + V_ij ;
         b           = ones (     dim    ,1) ;
         X           = zeros(length(phi) ,1) ;
         
@@ -50,9 +56,7 @@ switch Output
         out1        = X ;
         out2        = phi ;
     case 'Eigenwerte'
-%          disp('Eigenwerte')
-        % Bestimmung der Eigenwerte (eig_val) samt Normierung der Wellenfunktionen
-        % (states). Beides beginnend mit dem Grundzustand (sort).
+        H              = Hmx_ii(n) + V_ij ;
         [states, EW]   = eig(H,'vector');
         [EW, idx]      = sort(EW);
         states         = states(:,idx);
@@ -66,6 +70,10 @@ switch Output
 %         disp(EW(1))
         out1            = EW ;
         out2            = states ;
+    case 'issMatrix'
+        disp('Programm  gestoppt')        
+        out1            = [] ;
+        out2            = [] ;
 end
 
 

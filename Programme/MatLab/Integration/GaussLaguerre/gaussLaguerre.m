@@ -15,8 +15,8 @@ switch Potential
         
         fcn     = 'fcn_Coulomb';
         f       = @(x) fcn_Coulomb(x) ;
-        
-%         Für den fall das Keldysh und Coulomb mit unterschiedlich vielen 
+        prefix  = 'VC_ij_' ; 
+%         Für den fall da s Keldysh und Coulomb mit unterschiedlich vielen 
 %         Stützstellen konvergien 
         order   = @(n) n+1 ;
     
@@ -24,6 +24,7 @@ switch Potential
         
         fcn     = 'fcn_Keldysh';
         f       = @(x) fcn_Keldysh(x) ; 
+        prefix  = 'VK_ij_' ;
         order   = @(n) n+1 ;
 end
 
@@ -54,7 +55,7 @@ for jj=0:dim
         fclose all;
     end
 end
-
+csvwrite(['MatrixFiles/' prefix num2str(max(n)) '.dat'], V_ij)  
 end
 
 
