@@ -25,14 +25,14 @@ switch EXMX
     case 'MX'
         %==================================
         n           = 300; 
-        lambda      = [1/4 1/2 1 2 2 8]  ;  
-        phi         = linspace(-700,300,700) ;
+        lambda      = [1 2 4 8 16 25]  ;  
+        phi         = linspace(-4000,100,700) ;
         Potential   = 'Coulomb' ; 
         Method      = 'Ana' ; 
         EB3D        = 300; 
         %==================================
         
-        for i=1:6
+        for i=1:3
         ax          = subplot(3,2,i);   
         Input_mx    = {n,lambda(i),phi,Potential,Method};
         
