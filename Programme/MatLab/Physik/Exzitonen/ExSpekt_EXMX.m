@@ -24,15 +24,15 @@ switch EXMX
         grid on;                    set(gca,'GridLineStyle', '--', 'fontsize',13);
     case 'MX'
         %==================================
-        n           = 20; 
+        n           = 300; 
         lambda      = [1/4 1/2 1 2 2 8]  ;  
-        phi         = linspace(-5,10,500) ;
-        Potential   = 'Keldysh' ; 
-        Method      = 'Num' ; 
-        EB3D        = 145; 
+        phi         = linspace(-700,300,700) ;
+        Potential   = 'Coulomb' ; 
+        Method      = 'Ana' ; 
+        EB3D        = 300; 
         %==================================
         
-        for i=1:6   
+        for i=1:6
         ax          = subplot(3,2,i);   
         Input_mx    = {n,lambda(i),phi,Potential,Method};
         

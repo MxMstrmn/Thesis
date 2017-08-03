@@ -10,7 +10,7 @@ temp    = 1;
 while abs(temp) > 1e-20
    
    temp = temp*prod(ak)./prod(bk)/k ;
-   disp(temp)
+%    disp(temp)
    F    = F + temp*z.^k;
    ak   = ak+1;
    bk   = bk+1; 
