@@ -39,7 +39,7 @@ switch Potential
                 V_ij    =  -cPot *exp(gammaPrefactor(0:n)) .*F32(0:n) ;
             case 'Num'     
                 try
-                    V_ij        =  -cPot *csvread(['VC_ij_' num2str(n) '.dat']);
+                    V_ij        =  -cPot*pi^(-0.5) *csvread(['VC_ij_' num2str(n) '.dat']);
                     
                 catch
                     disp('Berechne Coulomb-Matrix erst mit gaussLaguerre.m')

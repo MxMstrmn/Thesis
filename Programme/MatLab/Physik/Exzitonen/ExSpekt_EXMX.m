@@ -1,6 +1,7 @@
 % clear all
 % clc 
-figure
+% figure
+hold on;
  
 EXMX      = 'MX' ; 
 UNIT      = 'NONE';
@@ -24,15 +25,15 @@ switch EXMX
         grid on;                    set(gca,'GridLineStyle', '--', 'fontsize',13);
     case 'MX'
         %==================================
-        n           = 300; 
-        lambda      = 1e-4*[1 2 4 6 10 16]  ;  
+        n           = 169; 
+        lambda      = 1.5*[1 2 4 6 10 16]  ;  
         phi         = linspace(-700,100,600) ;
         Potential   = 'Coulomb' ; 
-        Method      = 'Ana' ; 
+        Method      = 'Num' ; 
         EB3D        = 300; 
         %==================================
         
-        for i=1:2
+        for i=1:6
         ax          = subplot(3,2,i);   
         Input_mx    = {n,lambda(i),phi,Potential,Method};
         
@@ -47,8 +48,8 @@ switch EXMX
         end
         
         
-        plot_i      = plot(ax,hw, imag(X)/max(imag(X)), 'b',    'linewidth', 2.0) ; hold on
-        stem_i      = stem(ax,EW, ones(1, length(EW)), 'b--',   'linewidth', 1.1, ...
+        plot_i      = plot(ax,hw, imag(X)/max(imag(X)), 'r',    'linewidth', 2.0) ; hold on
+        stem_i      = stem(ax,EW, ones(1, length(EW)), 'r--',   'linewidth', 1.1, ...
                             'markeredgecolor', 'none') ;
         
         xlim([min(hw) max(hw)]); ylim([0 1.1]); 
