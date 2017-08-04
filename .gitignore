@@ -5,6 +5,7 @@
 *.synctex.gz
 *.tex.bak
 *.cej
+*.nfs*
 .gz
 .DS_Store
 Texte/.DS_Store

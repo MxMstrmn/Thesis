@@ -3,7 +3,6 @@ function [out1, out2] = Exziton_MX(n,B,phi,Potential,Method,Output)
 disp(['Berechnung: ' Output ' des ' Potential '-Potentials'])
 dim                 = n+1 ; 
 
-lambda          = a0^2*B*c.e/c.hbar*unitB;
 
 c               = constants(); 
 unitB           = 1/c.e*1e-3 ;   
@@ -21,9 +20,15 @@ mu                = 0.457*0.067/0.524*c.me ;
 % EB              = c.hbar.^2 /2 / mu / a0^2 ;
 
 % SI
-cPot            = c.e^2/(4*pi*c.eps0) * sqrt(0.5*B*c.e /c.hbar) ; 
+cPot            = c.e^2/(4*pi*c.eps0*c.eps) * sqrt(0.5*B*c.e /c.hbar) ; 
 wc              = c.e*B/mu ;
-lambda          = 1; 
+
+% %Kontrolle 
+% a0              = 4*pi*c.eps0/c.e^2 * c.hbar^2/mu ;
+% lambda          = a0^2*B*c.e/c.hbar; 
+% EB              = c.hbar.^2 /2 / mu / a0^2 ;
+% disp(lambda)
+% disp(EB)
 
 switch Potential
     case 'Coulomb'
@@ -46,7 +51,6 @@ switch Potential
  
 
     case 'Keldysh'
-        cPot            =  c.e^2 /4 /pi /c.eps0 /sqrt(2) *sqrt(c.e*B/c.hbar);
         try 
             V_ij        =  - cPot *csvread(['VK_ij_' num2str(n) '.dat']);
             
@@ -70,7 +74,7 @@ switch Output
         for i=1:length(phi)
             A       = H + Inh_ii(n,phi(i)) ;
             x_n     = linsolve(A,b) ;
-            X(i)    = sum(x_n)*lambda/pi ;
+            X(i)    = sum(x_n); %*lambda/pi ;
         end
         out1        = X ;
         out2        = phi ;

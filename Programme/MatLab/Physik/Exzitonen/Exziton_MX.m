@@ -9,10 +9,10 @@ unitB           = 1/c.e*1e-3 ;
 B               = B * unitB ; 
 disp(B/unitB)
 % MoS2
-% mu              = 0.46*0.41/0.87*c.me ;
+mu              = 0.46*0.41/0.87*c.me ;
 % a0              = 1.1016 ; 
 % % GaAs
-mu                = 0.457*0.067/0.524*c.me ;  
+% mu                = 0.457*0.067/0.524*c.me ;  
 % a0              = 12.3 ;
 
 % l               = sqrt(c.hbar/c.e/B) ; 
@@ -20,15 +20,15 @@ mu                = 0.457*0.067/0.524*c.me ;
 % EB              = c.hbar.^2 /2 / mu / a0^2 ;
 
 % SI
-cPot            = c.e^2/(4*pi*c.eps0) * sqrt(0.5*B*c.e /c.hbar) ; 
+cPot            = c.e^2/(4*pi*c.eps0*c.eps) * sqrt(0.5*B*c.e /c.hbar) ; 
 wc              = c.e*B/mu ;
 
-% %Kontrolle 
-% a0              = 4*pi*c.eps0/c.e^2 * c.hbar^2/mu ;
-% lambda          = a0^2*B*c.e/c.hbar; 
-% EB              = c.hbar.^2 /2 / mu / a0^2 ;
-% disp(lambda)
-% disp(EB)
+%Kontrolle 
+A0              = @(mu) 4*pi*c.eps0*c.eps*c.hbar^2/mu/c.e^2;
+lambda          = A0(mu)^2*B*c.e/c.hbar; 
+EB              = c.hbar.^2 /2 / mu / A0(mu)^2 ;
+disp(lambda)
+disp(EB)
 
 switch Potential
     case 'Coulomb'
@@ -61,7 +61,7 @@ switch Potential
 end
 
 Hmx_ii      = @(n)      diag     (  0.5*c.hbar*wc*(2*(0:n)+1) ) ;
-Inh_ii      = @(n,phi)  eye(dim)*( -phi    -1i*50     ) ;      
+Inh_ii      = @(n,phi)  eye(dim)*( -phi    -1i*10     ) ;      
 
 
 
