@@ -5,14 +5,13 @@ dim                 = n+1 ;
 
 
 c               = constants(); 
-unitB           = 1/c.e*1e-3 ;   
-B               = B * unitB ; 
+B               = B * c.unitB ; 
 disp(B/unitB)
 % MoS2
-% mu              = 0.46*0.41/0.87*c.me ;
+mu              = 0.46*0.41/0.87*c.me ;
 % a0              = 1.1016 ; 
 % % GaAs
-mu                = 0.457*0.067/0.524*c.me ;  
+% mu                = 0.457*0.067/0.524*c.me ;  
 % a0              = 12.3 ;
 
 % l               = sqrt(c.hbar/c.e/B) ; 
@@ -20,15 +19,16 @@ mu                = 0.457*0.067/0.524*c.me ;
 % EB              = c.hbar.^2 /2 / mu / a0^2 ;
 
 % SI
-cPot            = c.e^2/(4*pi*c.eps0*c.eps) * sqrt(0.5*B*c.e /c.hbar) ; 
+magnlen         = @(B)  sqrt(c.hbar/(B*c.e)) ; 
+cPot            = c.e^2/(4*pi*c.eps0*c.eps) * sqrt(0.5) /magnlen(B) ; 
 wc              = c.e*B/mu ;
 
-% %Kontrolle 
-% a0              = 4*pi*c.eps0/c.e^2 * c.hbar^2/mu ;
-% lambda          = a0^2*B*c.e/c.hbar; 
-% EB              = c.hbar.^2 /2 / mu / a0^2 ;
-% disp(lambda)
-% disp(EB)
+%Kontrolle 
+A0              = @(mu) 4*pi*c.eps0*c.eps*c.hbar^2/mu/c.e^2;
+lambda          = A0(mu)^2*B*c.e/c.hbar; 
+EB              = c.hbar.^2 /2 / mu / A0(mu)^2 ;
+disp(lambda)
+disp(EB)
 
 switch Potential
     case 'Coulomb'
@@ -39,7 +39,7 @@ switch Potential
                 V_ij    =  -cPot *exp(gammaPrefactor(0:n)) .*F32(0:n) ;
             case 'Num'     
                 try
-                    V_ij        =  -cPot *csvread(['VC_ij_' num2str(n) '.dat']);
+                    V_ij        =  -cPot*pi^(-0.5) *csvread(['VC_ij_' num2str(n) '.dat']);
                     
                 catch
                     disp('Berechne Coulomb-Matrix erst mit gaussLaguerre.m')
@@ -61,7 +61,7 @@ switch Potential
 end
 
 Hmx_ii      = @(n)      diag     (  0.5*c.hbar*wc*(2*(0:n)+1) ) ;
-Inh_ii      = @(n,phi)  eye(dim)*( -phi    -1i*2     ) ;      
+Inh_ii      = @(n,phi)  eye(dim)*( -phi    -1i*10     ) ;      
 
 
 

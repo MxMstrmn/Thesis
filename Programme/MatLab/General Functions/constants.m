@@ -17,7 +17,7 @@ CONST(1).a0         = 4 * pi * CONST(1).eps0 * CONST(1).hbar^2 ...
                       / CONST(1).me / CONST(1).e^2;                 % Bohrradius in nm
 CONST(1).Gamma      = 10;                                           % Linienbreite in meV
 CONST(1).E_G        = 0;                                            % Bandlücke des HL    
-
+CONST(1).unitB      = 1/CONST(1).e*1e-3 ;                           % T to meV / pA / nm^2
 S = CONST;  
 end
 

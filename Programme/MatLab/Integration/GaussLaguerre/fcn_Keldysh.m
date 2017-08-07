@@ -1,14 +1,17 @@
-function out = fcn_Keldysh(x)
+function out = fcn_Keldysh(x,B)
+c       = constants();
 
 % Gen. Laguerre Polynomial
-L   = @(n,a,x)    lf_function(length(x),n,a,x(:));
+L           = @(n,a,x)  lf_function(length(x),n,a,x(:));
+magnlen     = @(B)      sqrt(c.hbar/(B*c.e)) ; 
 
-% Parameter
-A   = 1; 
-B   = A*2*pi*6.6; 
+% Parameter 
+alpha   = 1; 
+beta    = alpha*2*pi*0.66; 
+B       = B * c.unitB;
 
 % Keldysh function for Gauss-Laguerre Integration
-f   = @(n,a,x)    (L(n,a,x)).^2 ./(A+B*sqrt(2*x(:))) ;
+f   = @(n,a,x)    (L(n,a,x)).^2 ./(alpha+beta/magnlen(B)*sqrt(2*x(:))) ;
 
 
 n   = getGlobaln ;

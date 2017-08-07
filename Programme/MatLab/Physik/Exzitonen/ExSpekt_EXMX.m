@@ -28,9 +28,8 @@ switch EXMX
         n           = 169; 
         lambda      = 1.5*[1 2 4 6 10 16]  ;  
         phi         = linspace(-700,100,600) ;
-        Potential   = 'Coulomb' ; 
+        Potential   = 'Keldysh' ; 
         Method      = 'Num' ; 
-        EB3D        = 300; 
         %==================================
         
         for i=1:6

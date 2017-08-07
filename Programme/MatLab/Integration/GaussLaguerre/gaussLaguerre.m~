@@ -1,4 +1,4 @@
-function V_ij = gaussLaguerre(dim, Potential, B)
+function V_ij = gaussLaguerre(dim, Potential)
 
 % % Beispiel
 % 
@@ -23,8 +23,8 @@ switch Potential
     case {'Keldysh'}
         
         fcn     = 'fcn_Keldysh';
-        f       = @(x) fcn_Keldysh(x,B) ; 
-        prefix  = ['VK_ij_B' num2str(B) '_'] ;
+        f       = @(x) fcn_Keldysh(x) ; 
+        prefix  = ['VK_ij_' num2str()] ;
         order   = @(n) n+1 ;
 end
 

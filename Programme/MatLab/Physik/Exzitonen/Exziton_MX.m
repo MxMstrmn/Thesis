@@ -5,8 +5,7 @@ dim                 = n+1 ;
 
 
 c               = constants(); 
-unitB           = 1/c.e*1e-3 ;   
-B               = B * unitB ; 
+B               = B * c.unitB ; 
 disp(B/unitB)
 % MoS2
 mu              = 0.46*0.41/0.87*c.me ;
@@ -20,7 +19,8 @@ mu              = 0.46*0.41/0.87*c.me ;
 % EB              = c.hbar.^2 /2 / mu / a0^2 ;
 
 % SI
-cPot            = c.e^2/(4*pi*c.eps0*c.eps) * sqrt(0.5*B*c.e /c.hbar) ; 
+magnlen         = @(B)  sqrt(c.hbar./(B*c.e)) ; 
+cPot            = c.e^2/(4*pi*c.eps0) / sqrt(2*pi); 
 wc              = c.e*B/mu ;
 
 %Kontrolle 
@@ -35,11 +35,12 @@ switch Potential
             %CONS        =  c.e^2 /4 /pi /c.eps0 /c.eps /sqrt(2) *sqrt(c.e*B/c.hbar);
         switch Method
             case 'Ana'                
-                cPot    =   cPot *pi^(-0.5) ;
+                cPot    =   cPot /magnlen(B)/c.eps ;
                 V_ij    =  -cPot *exp(gammaPrefactor(0:n)) .*F32(0:n) ;
             case 'Num'     
                 try
-                    V_ij        =  -cPot*pi^(-0.5) *csvread(['VC_ij_' num2str(n) '.dat']);
+                    cPot    =   cPot /magnlen(B)/c.eps ;
+                    V_ij    =  -cPot *csvread(['VC_ij_' num2str(n) '.dat']);
                     
                 catch
                     disp('Berechne Coulomb-Matrix erst mit gaussLaguerre.m')
@@ -52,7 +53,7 @@ switch Potential
 
     case 'Keldysh'
         try 
-            V_ij        =  - cPot *csvread(['VK_ij_' num2str(n) '.dat']);
+            V_ij        =  - 2*pi*c.e *csvread(['VK_ij_B' num2str(B) '_' num2str(n) '.dat']);
             
         catch
             disp('Berechne Keldysh-Matrix erst mit gaussLaguerre.m')
