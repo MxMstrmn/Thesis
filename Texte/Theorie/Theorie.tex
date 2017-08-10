@@ -1,9 +1,161 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc} 
+%\usepackage[ngerman]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath}
+
+
+\newcommand{\ind}[2]{{_{#1}^{#2}}}
+\newcommand{\+}{\dagger}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\dt}[1]{\frac{\tt d #1}{\tt d t}}
+\newcommand{\bra}{\left \langle}
+\newcommand{\ket}{\right \rangle}
+\newcommand{\HF}[9]{ \bra #1 #4 \ket\bra #2 #3\ket \delta_{#5\,#8}\delta_{#6\,#7} #9 \bra #1 #3 \ket\bra #2 #4\ket \delta_{#5\, #7}\delta_{#6\, #8}}
+\renewcommand{\^}{\hat}
+\renewcommand{\tt}{\text}
+\renewcommand{\~}{\widetilde}
+%\renewcommand{\sum}{\Sigma}
+\renewcommand{\k}{{k^\prime}}
+
 \begin{document}
 \section{Halbleiter Bloch Gleichungen}
-Im Rahmen dieser Arbeit soll ausgehend von den Halbleiter Bloch Gleichungen (SBE) die Wechselwirkung von Exzitonen im Magnetfeld untersucht werden. Auf Grundlage einer Zweiband-Näherung wird dazu neben der Coulombwechselwirkung der Elektronen und Löcher zunächst die Wechselwirkung mit einem (schwachen?) Lichfeld beschrieben. Der Hamilton-Opoerator in 2.Quantisierung setzt sich demanch aus fogenden teilen zusammen: 
-\begin{align*}
-H_el
-\end{align*}
+\subsection{Hamiltonoperator für die Licht Materie Wechselwirkung}
+Im Rahmen dieser Arbeit soll ausgehend von den Halbleiter Bloch Gleichungen (SBE) die Wechselwirkung von Exzitonen im Magnetfeld untersucht werden. Auf Grundlage einer Zweiband-Näherung wird dazu neben dem kinetischen Energieanteil $H\ind{\tt{el}}{}$ sowie der Coulombwechselwirkung $H\ind{\tt{el-el}}{}$ der Elektronen zunächst die Wechselwirkung mit einem (schwachen?) Lichtfeld $H\ind{\tt{el-L}}{}$ beschrieben. Der in 2.Quantisierung zugehörige Hamiltonian $H$ setzt sich aus folgenden Teilen zusammen: 
+\begin{alignat*}{3}
+H \quad  				&&\ = \ && &H\ind{\tt{el}}{} +H\ind{\tt {el-el}}{}+H\ind{\tt {el-L}}{} \\
+H\ind{\tt{el}}{} 	\ \	&&\ = \ && &\sum_k\left (			\E \ind{k}{\tt c} c\ind{k}{\+}c\ind{k}{} +\E \ind{k}{\tt {v}}v\ind{k}{\+}v\ind{k}{}    	\right ) \\
+H\ind{\tt {el-el}}{} &&\ = \ &&\frac{1}{2}&\sum_{k,k',q} V(q)\left [			c\ind{k+q}{\+} c\ind{k'-q}{\+}c\ind{k'}{}c\ind{k}{} +v\ind{k+q}{\+}v\ind{k'-q}{\+}v\ind{k'}{}v\ind{k}{}   +  	 	c\ind{k+q}{\+}v\ind{k'-q}{\+}v\ind{k'}{}c\ind{k}{}    	\right ] \\
+H\ind{\tt {el-L}}{} 	&&\ = \ && -&\sum_{k} \left (dE c\ind{k}{\+}v\ind{k}{} + d^*E^*v\ind{k}{\+}c\ind{k}{}\right ) 
+\end{alignat*}
+Dabei beschreiben $c\ind{k}{\+}/c\ind{k}{}$ sowie $v\ind{k}{\+}/v\ind{k}{}$ jeweils die zum Zustand $k$ gehörenden Erzeuger und Vernichter im Leitungsband bzw. Valenzband. 
 
+\subsection{Heisenberg-Bewegungsgleichung}
+Zur Bestimmung physikalischer Größen ist es notwendig die Zeitentwicklung des System bestimmen zu können. Im Heisenbergbild tragen die Operatoren die Zeitabhängigkeit und es gilt allgemein: 
+\begin{align*}
+\dt{} \^A  = \frac{\tt i}{\hbar}\left [H,A\right ] + \partial_t \^{A}
+\end{align*}
+Im vorliegenden Fall genügt es die einzelnen Kommutatoren auszuwerten, da keine explizite Zeitabhängigkeit bei den Operatoren $c\ind{k}{(\+)}$ und  $v\ind{k}{(\+)}$ vorliegt. Daher folgt:
+\begin{alignat*}{7}
+\left [H\ind{\tt{el}}{},c\ind{k}{}\right ]   && \ = \ &&-\E \ind{k}{\tt c} c\ind{k}{} && \qquad &&
+ \left [H\ind{\tt{el-el}}{1},c\ind{k}{}\right ]  &&\ =\ && -\sum_{k',\,q} \,&V(q)c\ind{k'\tt -q}{\+}c\ind{k'}{}c\ind{k\tt -q}{} \\
+\left [H\ind{\tt{el-L}}{},c\ind{k}{}\right ]  &&\ =\ && dE v\ind{k}{} && \qquad &&
+\left [H\ind{\tt{el-el}}{3},c\ind{k}{}\right ]  &&\ =\ && -\sum_{k',\,q}^{}\, &V(q)v\ind{k'\tt-q}{\+}v\ind{k'}{}c\ind{k\tt -q}{}
+\end{alignat*} 
+\[ 	-\tt i\hbar\dt{} c\ind{k}{}  =  \left [H,c\ind{k}{}\right ] \ = \  \E \ind{k}{\tt c}c\ind{k}{}+dEv\ind{k}{} - \sum_{k',q}^{} V(q)\left [c\ind{k'\tt -q}{\+}c\ind{k'}{}+v\ind{k'\tt-q}{\+}v\ind{k'}{}\right ]c\ind{k\tt -q}{} 		\]
+Aus der Symmetrie des Hamiltonoperators $H$ bzgl. $c$ und $v$ sowie der einfachen Beziehung $[H,c\ind{k}{\+}]=-[H,c\ind{k}{}]\ind{}{\+}$ lässt sich die Zeitentwicklung der anderen Operatoren einfach ableiten: 
+\begin{alignat*}{5}
+-\tt i\hbar\dt{} c\ind{k}{\+}   &&\ =\ && \ - \ \E \ind{k}{\tt c}c\ind{k}{\+} && \ -\  d^*&E^*v\ind{k}{\+} &&+ \sum_{k',q}^{} V(q)\, c\ind{k\tt -q}{\+}\left [c\ind{k'}{\+}c\ind{k'\tt -q}{}+v\ind{k'}{\+}v\ind{k'\tt-q}{}\right ] \\
+-\tt i\hbar\dt{} v\ind{k}{}  && \ = \  &&  \E \ind{k}{\tt v}v\ind{k}{}    &&\ +\  d^*&E^* c\ind{k}{}  &&- \sum_{k',q}^{} V(q)\left [v\ind{k'\tt -q}{\+}v\ind{k'}{}+c\ind{k'\tt-q}{\+}c\ind{k'}{}\right ]v\ind{k\tt -q}{} \\ 
+-\tt i\hbar\dt{} v\ind{k}{\+}   &&\ =\ && \ -\ \E \ind{k}{\tt v}v\ind{k}{\+} && \ -\ d&Ec\ind{k}{\+} &&+ \sum_{k',q}^{} V(q)\, v\ind{k\tt -q}{\+}\left [v\ind{k'}{\+}v\ind{k'\tt -q}{}+c\ind{k'}{\+}c\ind{k'\tt-q}{}\right ]
+\end{alignat*}
+\subsection{Dichtematrixformalismus}
+Um Aussagen über physikalisch meßbare Größen zu erhalten, ist es notwendig die Bewegungsgleichungen für die Dichtematrix des 2-Band-Systems zu formulieren. Da es insbesondere um die physikalischen Eigenschaften von Exzitonen gehen soll, werden die Diagonalterme $f\ind{k}{}$  der Dichtematrix
+\begin{align*}
+\rho 
+= \begin{pmatrix}
+\bra c\ind{k}{\+}c\ind{k}{} \ket & \bra c\ind{k}{\+}v\ind{k}{} \ket \\[8pt]
+\bra v\ind{k}{\+}c\ind{k}{} \ket & \bra v\ind{k}{\+}v\ind{k}{}  \ket
+\end{pmatrix}
+=\begin{pmatrix}
+f\ind{k}{\tt c}& \mathit{\Psi}\ind{k}{*}  \\[8pt]
+\mathit{\Psi}\ind{k}{} & f\ind{k}{\tt v}
+\end{pmatrix}\ \ ,
+\end{align*}
+welche Besetzungen des Zustandes k im Leitungs- bzw. Valenzband beschreibe nicht weiter beachtet. Die $\mathit{\Psi}_k$ Terme hingegen beschreiben Übergangsamplituden, aus denen man optische Eigenschaften wie die Suszeptibilität $\chi$ ableiten kann, deren Imaginärteil ein Maß für die Absorption des Materials ist. Darüber hinaus lässt sich $\mathit{\Psi}$ mit der Exzitonen-Wellenfunktion in Verbindung bringen, indem ... . []
+Es ergibt sich: 
+\begin{alignat*}{5}
+& -\tt i\hbar \dt{}\mathit{\Psi}\ind{k}{}  && \ = \ &&  \bra  v\ind{k}{\+}\dt{c\ind{k}{}\,} \ket + \bra \dt{v\ind{k}{\+}\,}c\ind{k}{} \ket &&  &&\\[8pt]
+& && \ = \ &&\ (\E \ind{k}{\tt c}-\E \ind{k}{\tt v})\mathit{\Psi}+dE(f\ind{k}{\tt v}-f\ind{k}{\tt c}) 
++ \sum_{k',q}^{} V(q)  &&\Big [ &&\bra  v\ind{k\tt -q}{\+}\left (v\ind{k'}{\+}v\ind{k'\tt -q}{}+c\ind{k'}{\+}c\ind{k'\tt-q}{}\right )c\ind{k}{} 		\ket  \\  
+& && && 			   			 &&	-	   &&\bra  v\ind{k}{\+}\left (c\ind{k'\tt -q}{\+}c\ind{k'}{}+v\ind{k'\tt-q}{\+}v\ind{k'}{}\right )c\ind{k\tt -q}{}		\ket  \Big ] 	
+\end{alignat*}
+Es zeigt sich, dass die Bewegungsgleichung für $\mathit{\Psi}$ [mikr. Polarisation/ Übergangsamplitude?] an einen Vierer-Erwartungswert koppelt, dessen Bewegungsgleichung wiederum an einen Sechser-Erwartungswert koppelt.  Um diese Hierarchie aufzubrechen, müssen Näherungsverfahren angewandt werden, wie sie im folgenden Abschnitt im Rahmen der Hartree-Fock Näherung besprochen werden sollen. 
+
+\subsection{Hartree-Fock Näherung}
+Die im obigen Abschnitt hergeleitete Bewegungsgleichung ist ohne Weiteres nicht zu lösen. Erst wenn es gelingt, die Vierer-Erwartungswerte, bestehend aus Erzeugern $c\ind{k}{}/v\ind{k}{}$ und Vernichtern $c\ind{k}{(\+)}/v\ind{k}{(\+)}$, geeignet zu nähern und zu bekannten Größen umzuformen, kann $\mathit{\Psi}$ bestimmt werden. [Was gehört hier rein? ]\\
+In Hartree-Fock Näherung faktorisiert ein Vierer-Erwartungswert in Produkte von makroskopischen Erwartungswerten: 
+\begin{alignat*}{3}
+\bra a\ind{k}{\+}b\ind{l}{\+}c\ind{m}{}d\ind{n}{} \ket 
+&& \ = \ &&  		\bra 		a\ind{k}{\+}d\ind{n}{}			\ket		\bra 		b\ind{l}{\+}c\ind{m}{}			\ket \delta_{kn}\delta_{lm}
+- 							\bra 		a\ind{k}{\+}c\ind{m}{}		\ket		\bra 		b\ind{l}{\+} d\ind{n}{}		\ket \delta_{km}\delta_{ln}				%[U-W]
+\end{alignat*}
+Konkret für die Elektron-Elektron Wechselwirkung bedeutet dies 
+\begin{alignat*}{5}
+& && &&  \sum_{k',q}^{} V(q) && &&		\bra  v\ind{k\tt -q}{\+}\left (v\ind{k'}{\+}v\ind{k'\tt -q}{}+c\ind{k'}{\+}c\ind{k'\tt-q}{}\right )c\ind{k}{} 		\ket  
+-  	 					\bra  v\ind{k}{\+}\left (c\ind{k'\tt -q}{\+}c\ind{k'}{}+v\ind{k'\tt-q}{\+}v\ind{k'}{}\right )c\ind{k\tt -q}{}		\ket  \\[8pt]
+%
+%
+& && \ =\ && \sum_{k',q}^{} V(q)  &&\Big[	  &&   \HF	{   v\ind{k\tt -q}{\+}   } {   v\ind{k'}{\+}   } {   v\ind{k'\tt-q}{}  } {  c\ind{k}{}  } {k\tt -q}  {k'}  {k'\tt-q}  {k} {-}\\
+& &&  && && + && 	  	 \HF{   v\ind{k\tt -q}{\+}   } {   c\ind{k'}{\+}   } {   c\ind{k'\tt-q}{}  } {  c\ind{k}{}  } {k\tt -q}  {k'}  {k'\tt-q}  {k} {-} \\[1pt]
+& &&  && && - && 	  	\HF{   v\ind{k}{\+}	    	} {   c\ind{k'\tt-q}{}  }  {   c\ind{k'}{} 		 } {  c\ind{k\tt -q}{}  } {k}  {k'\tt-q}  {k'}  {k\tt-q} {+} \\[1pt]
+& &&  && && - && 	  	\HF{   v\ind{k}{\+}	    	} {   v\ind{k'\tt-q}{\+}  }  {   v\ind{k'}{} 		 } {  c\ind{k\tt -q}{}  } {k}  {k'\tt-q}  {k'}  {k\tt-q} {+} \Big] \\[8pt]
+%
+%
+& && \ =\ &&  \sum_{q}^{} V(q)&&\ \big[ && \mathit{\Psi}_{k}\big(f\ind{k\tt-q}{\tt c}-f\ind{k\tt-q}{\tt v}\big) +\mathit{\Psi}_{k\tt-q}\big(f\ind{k}{\tt v}-f\ind{k}{\tt c}\big)\big]\quad , 
+\end{alignat*}
+sodass sich für die Exzitonenwellenfunktion in Hartree-Fock Näherung ergibt
+\begin{alignat*}{3}
+& -i\hbar\dt{} \mathit{\Psi} && \ =\ && (\E \ind{k}{\tt c}-\E \ind{k}{\tt v})\mathit{\Psi}+dE(f\ind{k}{\tt v}-f\ind{k}{\tt c})  + \sum_{q} V_q\big[ \mathit{\Psi}_{k}\big(f\ind{k\tt-q}{\tt c}-f\ind{k\tt-q}{\tt v}\big) +\mathit{\Psi}_{k\tt-q}\big(f\ind{k}{\tt v}-f\ind{k}{\tt c}\big)\big] \\
+& && \ =\ && (\E \ind{k}{\tt c}-\E \ind{k}{\tt v})\mathit{\Psi}+dE(f\ind{k}{\tt v}-f\ind{k}{\tt c})  + \mathit{\Psi}_{k}\sum_{k'} V_{k\tt -k'}\big(f\ind{k'}{\tt c}-f\ind{k'}{\tt v}\big) +\big(f\ind{k}{\tt v}-f\ind{k}{\tt c}\big)\sum_{k'} V_{k\tt-k'}\mathit{\Psi}_{k'} \\	
+\end{alignat*}
+An dieser Stelle würde der Valenzbandbeitrag der Elektronen noch berücksichtigt werden, was jedoch nicht mehr notwendig ist, sofern einem die gesamte Bandstruktur des Materials zur Verfügung steht oder man auch nur in effektiver Masse Näherung rechnet. In beiden Fällen würde es zu einer Doppelzählung des Valenzbandbeitrags kommen, was vermieden wird, indem die Bewegungsgleichung um eine $1$ erweitert wird. 
+\begin{alignat*}{4}
+& -i\hbar\dt{}\mathit{\Psi} && \ =\ && (\E \ind{k}{\tt c}-\E \ind{k}{\tt v})\mathit{\Psi}&& +dE(f\ind{k}{\tt v}-f\ind{k}{\tt c}) \\
+& && && && + \mathit{\Psi}_{k}\sum_{k'} V_{k\tt -k'}\big(f\ind{k'}{\tt c}-f\ind{k'}{\tt v}+1\big) +\big(f\ind{k}{\tt v}-f\ind{k}{\tt c}\big)\sum_{k'} V_{k\tt-k'}\mathit{\Psi}_{k'} 
+\end{alignat*}
+\subsection{Übergang ins Elektron-Loch Bild}
+Es bietet sich an, das Zweiband-System nunmehr im Sinne von Elektronen und Löchern zu betrachten, wobei der Übergang durch folgende Ersetzungen gestaltet wird
+\begin{alignat*}{3}
+& f\ind{\tt c}{k} \rightarrow f\ind{\,e}{k} 		&&\qquad f\ind{\tt v}{k} 	&&\rightarrow 1-f\ind{h}{k}\\
+& \E\ind{k}{\tt c} \rightarrow \E\ind{k}{e} 	&&\qquad \E\ind{k}{\tt v}  &&\rightarrow -\E\ind{k}{h} 
+\end{alignat*}
+Damit ergeben sich die Hatree-Fock Gleichungen im Elektron-Loch Bild zu 
+\begin{alignat*}{4}
+& \tt i \hbar\dt{}\mathit{\Psi}_k && \ =\ && 
+\Big[\E \ind{k}{e}+\E \ind{k}{h} - \sum_{k'} V_{k\tt -k'}(f\ind{k'}{\,e}+f\ind{k'}{h})\Big]\mathit{\Psi}_k
+-(1-f\ind{k}{\,e}-f\ind{k}{h})\Big[dE+\sum_{k'} V_{k\tt-k'}\mathit{\Psi}_{k'}\Big] \\
+& && \ =\ && [\~\E \ind{k}{e}+\~\E \ind{k}{h}]\mathit{\Psi}_k
+-(1-f\ind{k}{\,e}-f\ind{k}{h})\,\Omega_k \quad ,
+\end{alignat*}
+wobei gilt 
+\begin{alignat*}{7}
+\~\E\ind{k}{e/h} &&\ =\ && \E \ind{k}{e/h} - \sum_{k'} V_{k\tt -k'}f\ind{k'}{\,e/h} &&\quad\tt{sowie}\quad &&\Omega_k 				&&\ =\ && dE+\sum_{k'} V_{k\tt-k'}\mathit{\Psi}_{k'} \quad .\\
+\end{alignat*}
+% - \sum_{k'} V_{k\tt -k'}(f\ind{k'}{e}-f\ind{k'}{h}) steckt in ~E~
+%\Big[dE+\sum_{k'} V_{k\tt-k'}\mathit{\Psi}_{k'}\Big] ist Omega
+\subsection{Inhomogene Exzitonen Gleichung}
+Die einfachste Näherung für die inkohärenten Bestandteile der Bewegungsgleichung ist die Einführung einer Lebenszeit $T_2$ für das Exziton, welche unmittelbar auf eine endliche Linienbreite $\Gamma$ im Absorptionsspektrum führt. Diese Linienbreite folgt außerdem aus jenen Näherungsverfahren, die über die einfache Hartree-Fock Näherung hinaus gehen, deren exakte Herleitung jedoch kein Bestandteil dieser Arbeit sein soll. Einfach gesprochen kann man diese Linienbreite allerdings auch als Konsequenz der Kausalität auffassen, da ein Spektrum bestehend aus scharfen $\delta$-Peaks physikalisch unrealistisch ist. 
+\begin{alignat*}{3}
+\Big[-i\hbar\dt{}\mathit{\Psi}_k\Big]_\tt{inc} = \frac{\hbar}{T_2}\mathit{\Psi}_k = \tt i\Gamma \mathit{\Psi}_k
+\end{alignat*}
+Weiterhin sei angenommen, dass das Material mit einer monochromatischen Lichtquelle bestrahlt wird, beispielsweise einem Laser, sodass man vereinfachend schreiben kann 
+\begin{alignat*}{2}
+E(t)=\~{E}(t)\exp(i\omega_0 t) 	\\
+{\mathit{\Psi}}(t)=\~{\mathit{\Psi}}(t)\exp(i\omega_0 t) &&\quad .
+\end{alignat*}
+Entsprechend folgt 
+\begin{alignat*}{3}
+& \tt i \hbar\dt{}\mathit{\~\Psi}_k && =\ && [\~\E \ind{k}{e}+\~\E \ind{k}{h}-\hbar\omega_0-\tt i \Gamma]\mathit{\Psi}_k
+-(1-f\ind{k}{e}-f\ind{k}{h})\,\Omega_k \quad .
+\end{alignat*}
+Im Falle des Gleichgewichts und nur geringer Elektronendichten im Valenzband, das System befinde sich (nahezu) im Grundzustand, sind die Näherungen 
+\begin{alignat*}{7}
+\ \dt{} \~\mathit{\Psi} &&\ \ll \ && \frac{1}{T_2}\~\mathit{\Psi} && \quad \tt{sowie} \quad && f\ind{k}{\,e/h} &&\ \ll \ && 1 
+\end{alignat*}
+physikalisch sinnvoll und unter der Annahme parabolischer Bänder
+\begin{alignat*}{3}
+\E \ind{k}{e/h} &&\ =\ && \frac{E_\tt G}{2} + \frac{\hbar^2}{2m_{e/h}}k^2 \quad ,
+\end{alignat*}
+welche gerechtfertigt ist in der Nähe des $\Gamma$-Punktes in der Brillouin-Zone, folgt das inhomogene Gleichungssystem für die Exzitonenwellenfunktion
+\begin{alignat*}{3}
+&\left (\~\E \ind{k}{e}+\~\E \ind{k}{h}-\hbar\omega_0-\tt i \Gamma\right )\mathit{\Psi}_k - \sum_{k'} V_{k\tt-k'}\~\mathit{\Psi}_{k'} &&\ =\ && d\~E \quad .
+\end{alignat*}
+Dieses Gleichungssystem kann ebenso auf die Suzeptibilität $\chi$ umgeschrieben werden, dann gilt die Gleichung 
+\begin{alignat*}{3}
+&\sum_{k'}\Big[\left (\~\E \ind{k}{e}+\~\E \ind{k}{h}-\hbar\omega_0-\tt i \Gamma\right )\delta_{k\,k'} -  V_{k\tt-k'}\Big]\chi_{k'} &&\ =\ && 1
+\quad \tt{, denn}\quad \chi = \frac{\~\mathit{\Psi}}{dE} \quad .
+\end{alignat*}
+[WOFÜR DIESE GLEICHUNG ZU GEBRAUCHEN; PHYSIKALISCHER EINFLUSS]
 \end{document}
