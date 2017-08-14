@@ -2,26 +2,43 @@
 \usepackage[utf8]{inputenc}
 %\usepackage[latin1]{inputenc} 
 %\usepackage[ngerman]{babel}
+\usepackage{bbold} 					% Einheitsoperator
+\usepackage{dsfont}					% Einheitsoperator
 \usepackage{lmodern}
-\usepackage{amsmath}
+\usepackage{amsmath}				% Mathe
+\usepackage{array}						% Array Umgebung
+\usepackage{xfrac}						% sfrac / xfrac
+%\usepackage{classicthesis}
+
+%\numberwithin{equation}{chapter}
 
 
 \newcommand{\ind}[2]{{_{#1}^{#2}}}
 \newcommand{\+}{\dagger}
 \newcommand{\E}{\mathcal{E}}
-\newcommand{\dt}[1]{\frac{\tt d #1}{\tt d t}}
+\newcommand{\dt}[1]{\tfrac{\tt d #1}{\tt d t}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\bra}{\left \langle}
+\newcommand{\ck}{\left |}
 \newcommand{\ket}{\right \rangle}
+\newcommand{\com}[2]{[\, #1, #2 \,]}
+\newcommand\numberthis{\stepcounter{equation} \tag{\thesection.\theequation}}
 \newcommand{\HF}[9]{ \bra #1 #4 \ket\bra #2 #3\ket \delta_{#5\,#8}\delta_{#6\,#7} #9 \bra #1 #3 \ket\bra #2 #4\ket \delta_{#5\, #7}\delta_{#6\, #8}}
+\renewcommand{\exp}[1]{\tt{e}^{#1}}
+\renewcommand{\it}{\mathit}
+\renewcommand{\v}{\vec}
+\renewcommand{\L}{\mathcal{L}}
 \renewcommand{\^}{\hat}
 \renewcommand{\tt}{\text}
 \renewcommand{\~}{\widetilde}
 %\renewcommand{\sum}{\Sigma}
 \renewcommand{\k}{{k^\prime}}
+%\renewcommand{\sum}{\textstyle \sum\limits}
+
 
 \begin{document}
 \section{Halbleiter Bloch Gleichungen}
-\subsection{Hamiltonoperator für die Licht Materie Wechselwirkung}
+\subsection{Hamiltonoperator für die Licht-Materie Wechselwirkung}
 Im Rahmen dieser Arbeit soll ausgehend von den Halbleiter Bloch Gleichungen (SBE) die Wechselwirkung von Exzitonen im Magnetfeld untersucht werden. Auf Grundlage einer Zweiband-Näherung wird dazu neben dem kinetischen Energieanteil $H\ind{\tt{el}}{}$ sowie der Coulombwechselwirkung $H\ind{\tt{el-el}}{}$ der Elektronen zunächst die Wechselwirkung mit einem (schwachen?) Lichtfeld $H\ind{\tt{el-L}}{}$ beschrieben. Der in 2.Quantisierung zugehörige Hamiltonian $H$ setzt sich aus folgenden Teilen zusammen: 
 \begin{alignat*}{3}
 H \quad  				&&\ = \ && &H\ind{\tt{el}}{} +H\ind{\tt {el-el}}{}+H\ind{\tt {el-L}}{} \\
@@ -96,9 +113,11 @@ Konkret für die Elektron-Elektron Wechselwirkung bedeutet dies
 & && \ =\ &&  \sum_{q}^{} V(q)&&\ \big[ && \mathit{\Psi}_{k}\big(f\ind{k\tt-q}{\tt c}-f\ind{k\tt-q}{\tt v}\big) +\mathit{\Psi}_{k\tt-q}\big(f\ind{k}{\tt v}-f\ind{k}{\tt c}\big)\big]\quad , 
 \end{alignat*}
 sodass sich für die Exzitonenwellenfunktion in Hartree-Fock Näherung ergibt
-\begin{alignat*}{3}
-& -i\hbar\dt{} \mathit{\Psi} && \ =\ && (\E \ind{k}{\tt c}-\E \ind{k}{\tt v})\mathit{\Psi}+dE(f\ind{k}{\tt v}-f\ind{k}{\tt c})  + \sum_{q} V_q\big[ \mathit{\Psi}_{k}\big(f\ind{k\tt-q}{\tt c}-f\ind{k\tt-q}{\tt v}\big) +\mathit{\Psi}_{k\tt-q}\big(f\ind{k}{\tt v}-f\ind{k}{\tt c}\big)\big] \\
-& && \ =\ && (\E \ind{k}{\tt c}-\E \ind{k}{\tt v})\mathit{\Psi}+dE(f\ind{k}{\tt v}-f\ind{k}{\tt c})  + \mathit{\Psi}_{k}\sum_{k'} V_{k\tt -k'}\big(f\ind{k'}{\tt c}-f\ind{k'}{\tt v}\big) +\big(f\ind{k}{\tt v}-f\ind{k}{\tt c}\big)\sum_{k'} V_{k\tt-k'}\mathit{\Psi}_{k'} \\	
+\begin{alignat*}{4}
+& -i\hbar\dt{} \mathit{\Psi} && \ =\ && (\E \ind{k}{\tt c}-\E \ind{k}{\tt v})\mathit{\Psi} &&+dE(f\ind{k}{\tt v}-f\ind{k}{\tt c}) \\
+& && && && + \sum_{q} V_q\big[ \mathit{\Psi}_{k}\big(f\ind{k\tt-q}{\tt c}-f\ind{k\tt-q}{\tt v}\big) +\mathit{\Psi}_{k\tt-q}\big(f\ind{k}{\tt v}-f\ind{k}{\tt c}\big)\big] \\
+& && \ =\ && (\E \ind{k}{\tt c}-\E \ind{k}{\tt v})\mathit{\Psi} && +dE(f\ind{k}{\tt v}-f\ind{k}{\tt c})  \\
+& && && && + \mathit{\Psi}_{k}\sum_{k'} V_{k\tt -k'}\big(f\ind{k'}{\tt c}-f\ind{k'}{\tt v}\big) +\big(f\ind{k}{\tt v}-f\ind{k}{\tt c}\big)\sum_{k'} V_{k\tt-k'}\mathit{\Psi}_{k'} \\	
 \end{alignat*}
 An dieser Stelle würde der Valenzbandbeitrag der Elektronen noch berücksichtigt werden, was jedoch nicht mehr notwendig ist, sofern einem die gesamte Bandstruktur des Materials zur Verfügung steht oder man auch nur in effektiver Masse Näherung rechnet. In beiden Fällen würde es zu einer Doppelzählung des Valenzbandbeitrags kommen, was vermieden wird, indem die Bewegungsgleichung um eine $1$ erweitert wird. 
 \begin{alignat*}{4}
@@ -111,7 +130,7 @@ Es bietet sich an, das Zweiband-System nunmehr im Sinne von Elektronen und Löch
 & f\ind{\tt c}{k} \rightarrow f\ind{\,e}{k} 		&&\qquad f\ind{\tt v}{k} 	&&\rightarrow 1-f\ind{h}{k}\\
 & \E\ind{k}{\tt c} \rightarrow \E\ind{k}{e} 	&&\qquad \E\ind{k}{\tt v}  &&\rightarrow -\E\ind{k}{h} 
 \end{alignat*}
-Damit ergeben sich die Hatree-Fock Gleichungen im Elektron-Loch Bild zu 
+Damit ergeben sich die Hatree-Fock/Halbleiter Bloch Gleichungen im Elektron-Loch Bild zu 
 \begin{alignat*}{4}
 & \tt i \hbar\dt{}\mathit{\Psi}_k && \ =\ && 
 \Big[\E \ind{k}{e}+\E \ind{k}{h} - \sum_{k'} V_{k\tt -k'}(f\ind{k'}{\,e}+f\ind{k'}{h})\Big]\mathit{\Psi}_k
@@ -121,10 +140,10 @@ Damit ergeben sich die Hatree-Fock Gleichungen im Elektron-Loch Bild zu
 \end{alignat*}
 wobei gilt 
 \begin{alignat*}{7}
-\~\E\ind{k}{e/h} &&\ =\ && \E \ind{k}{e/h} - \sum_{k'} V_{k\tt -k'}f\ind{k'}{\,e/h} &&\quad\tt{sowie}\quad &&\Omega_k 				&&\ =\ && dE+\sum_{k'} V_{k\tt-k'}\mathit{\Psi}_{k'} \quad .\\
+\~\E\ind{k}{e/h} &&\ =\ && \E \ind{k}{e/h} - \sum_{k'} V_{k\tt -k'}f\ind{k'}{\,e/h} &&\quad\tt{sowie}\quad &&\Omega_k 				&&\ =\ && dE+\sum_{k'} V_{k\tt-k'}\mathit{\Psi}_{k'} \quad .
 \end{alignat*}
-% - \sum_{k'} V_{k\tt -k'}(f\ind{k'}{e}-f\ind{k'}{h}) steckt in ~E~
-%\Big[dE+\sum_{k'} V_{k\tt-k'}\mathit{\Psi}_{k'}\Big] ist Omega
+An dieser Stelle zeigt sich, dass als Folge der Coulombwechselwirkung $\~\E\ind{k}{e/h}$ als renormierte Einteilchen Energien verstanden werden können wie auch $\Omega_k$ eine renormierte Rabi Energie darstellt. Damit wird die Tatsache verdeutlicht, dass das Elektron-Loch System nicht ausschließlich auf das äußere elektrische Feld $E(t)$ reagiert, sondern auf die Summe aus diesem und dem internen Dipolfeld. Das von diesen Gleichungen abgeleitet inhomogene Gleichungssystem erlaubt es, die Wechselwirkung mit einem klassischen Lichtfeld zu untersuchen. Im Gegensatz hierzu sind die Effekte, welche durch eine zusätzliche Feldquantisierung beschrieben würden, kein Bestandteil dieser Arbeit. 
+
 \subsection{Inhomogene Exzitonen Gleichung}
 Die einfachste Näherung für die inkohärenten Bestandteile der Bewegungsgleichung ist die Einführung einer Lebenszeit $T_2$ für das Exziton, welche unmittelbar auf eine endliche Linienbreite $\Gamma$ im Absorptionsspektrum führt. Diese Linienbreite folgt außerdem aus jenen Näherungsverfahren, die über die einfache Hartree-Fock Näherung hinaus gehen, deren exakte Herleitung jedoch kein Bestandteil dieser Arbeit sein soll. Einfach gesprochen kann man diese Linienbreite allerdings auch als Konsequenz der Kausalität auffassen, da ein Spektrum bestehend aus scharfen $\delta$-Peaks physikalisch unrealistisch ist. 
 \begin{alignat*}{3}
@@ -132,8 +151,8 @@ Die einfachste Näherung für die inkohärenten Bestandteile der Bewegungsgleich
 \end{alignat*}
 Weiterhin sei angenommen, dass das Material mit einer monochromatischen Lichtquelle bestrahlt wird, beispielsweise einem Laser, sodass man vereinfachend schreiben kann 
 \begin{alignat*}{2}
-E(t)=\~{E}(t)\exp(i\omega_0 t) 	\\
-{\mathit{\Psi}}(t)=\~{\mathit{\Psi}}(t)\exp(i\omega_0 t) &&\quad .
+E(t)=\~{E}(t)\tt{exp}(\tt i\omega_0 t) 	\\
+{\mathit{\Psi}}(t)=\~{\mathit{\Psi}}(t)\tt{exp}(\tt i\omega_0 t) &&\quad .
 \end{alignat*}
 Entsprechend folgt 
 \begin{alignat*}{3}
@@ -158,4 +177,199 @@ Dieses Gleichungssystem kann ebenso auf die Suzeptibilität $\chi$ umgeschrieben
 \quad \tt{, denn}\quad \chi = \frac{\~\mathit{\Psi}}{dE} \quad .
 \end{alignat*}
 [WOFÜR DIESE GLEICHUNG ZU GEBRAUCHEN; PHYSIKALISCHER EINFLUSS]
+\subsection{Bewegung im elektromagnetischen Feld}
+Um die inhomogene Exzitonen Gleichung noch um den Anteil des Magnetfeldes erweitern zu können, muss hierfür zunächst ein passender Hamiltonoperator gefunden werden, der die Effekte adäquat beschreibt. Zunächst soll hierfür von der klassischen Newtonschen Bewegungsgleichung ausgegangen werden, bevor über die klassische Hamiltonfunktion der Übergang in die quantenmechanische Beschreibung erfolgt, welche mit der Beschreibung mittels Erzeugern und Vernichtern abschließt. Gemäß der allgemeinen Lorentzkraft gilt 
+\begin{alignat*}{3}
+F = m\dt{\v x}  &&\ =\ && q(\v E + \v v \times \v B) \qquad
+\begin{cases}
+    \v E \ = - \tt{grad}\Phi -\partial_t \v A \\
+    \v B \ =\ \ \tt{rot}\v A
+\end{cases}
+\end{alignat*}
+Über das totale Differential für $\v A$ und geschicktes Umformen lässt sich diese Bewegungsgleichung auf eine zur Euler-Lagrange Bewegungsgleichung äquivalenten Form bringen, sodass sich für die $i$-te Komponente ergibt 
+\begin{alignat*}{3}
+\dt{}\left (\partial_{v_i}\L\right ) = \partial_{x_i}\L &&\qquad \Leftrightarrow  \qquad &&  \dt{} (m v_i + qA_i) = q\partial_{x_i}(\v v\v A -\Phi)\quad , 
+\end{alignat*}
+was wiederum auf die Lagrangefunktion $\L$ schließen lässt
+\begin{alignat*}{3}
+&\L(\v x,\v v, t) &&\ =\  &&  \frac{m}{2}\sum_i v_i^2 + q\sum_i  v_i A_i -q\Phi \\
+& &&\ =\  &&  \frac{m}{2}v^2 +q\v v\v A -q\Phi \quad .
+\end{alignat*}
+Gemäß der Legendre Transformation lässt sich hieraus die klassische Hamiltonfunktion $H$ für ein geladenes Teilchen im elektromagnetischen Feld bestimmen, indem der zu $v_i$ kanonisch konjugierte Impuls $p_i$ gebildet wird 
+\begin{alignat*}{3}
+ p_i = \pd{\L}{v_i} = \partial_{v_i}\L = mv_i+qA_i  	%(\v x ,\v p ,t)
+\end{alignat*} 
+und es folgt 
+\begin{alignat*}{3}
+& H(\v x,\v p,t)&& \ =\  && \v v \v p -\L(\v x,\v v,t)  \\
+& && \ =\ && \sum_i \frac{1}{2m}(p_i-qA_i)^2+q\Phi \quad .
+\end{alignat*}
+Die Quantisierung erfolgt mittels des Übergangs vom klassischen Impuls $\v p$ zum Impulsoperator $\^p$, woaus direkt der Hamiltonoperator resultiert
+\begin{alignat*}{5}
+& H(\^ x,\^ p,t)&& \ =\  && \sum_i \frac{1}{2m}(\^ p_i-q \^A_i)^2+q\Phi  &&\quad \tt{, wobei}\quad &&
+\begin{cases}
+   \v p \rightarrow \^p=-\tt i \hbar \nabla\cdot \\
+     \v x \rightarrow \^x=\v x \cdot  
+\end{cases} \quad. \\
+& && \ = \ && \frac{1}{2m}(\^ p -q \v A)^2+q\Phi &&  &&  \\
+& && \ = \ && \frac{1}{2m}(-\tt i \hbar \nabla -q \v A)^2+q\Phi 
+\end{alignat*}
+\subsection{Eichtransformationen}
+
+Es fällt auf, dass die Schrödingergleichung wegen des Hamiltonoperators  ausschließlich von dem Vektorpotential $\v A$, die Lorentzkraft jedoch nur vom Magnetfeld $\v B$ abhängt. Diese Zweideutigkeit führt auf die Frage, welchen Einfluss Eichtransformationen auf physikalische Größen wie die Wellenfunktion haben. Aus der Elektrodynamik ist bekannt, dass sich $\v A $ und $\it\Phi$ mit Hilfe einer skalaren Funktion $\it\Lambda(\v x,t)$ eichen lassen, wobei gilt
+\begin{alignat*}{7}
+\v A\ \rightarrow \ \v A ' &&\ =\ && \v A + \nabla \mathit{\Lambda} && \qquad && \mathit{\Phi} \ \rightarrow \ \mathit{\Phi} ' &&\ =\ &&  \mathit{\Phi} - \partial_t \mathit{\Lambda} \quad .
+\end{alignat*}
+Unter Zuhilfenahme der Identität 
+\begin{alignat*}{3}
+\exp{f(y)}\pd{}{y} &&\ =\ &&\left [\pd{}{y}-\pd{f(y)}{y}\right]\exp{f(y)}
+\end{alignat*}
+lässt sich schnell einsehen, dass die gestrichene Wellenfunktion von der Form
+\begin{alignat*}{3}
+\psi'(\v x, t ) = \tt{exp}\left (\frac{\tt i q}{\hbar}\it \Lambda(\v x, t)\right )\psi(\v x,t) \quad ,
+\end{alignat*}
+sein muss, denn wenn die Schrödingergleichung von links mit diesem Exponentialfaktor multipliziert wird, ergibt sich 
+\begin{alignat*}{5}
+& \Big [		\frac{1}{2m}\left (-\tt i\hbar\nabla-q\v A +\tt i\hbar\frac{\tt i q}{\hbar }\nabla\Lambda \right )^2+ 		
+&&	q\it\Phi \,\Big] &&
+\exp{\frac{\tt i e}{\hbar}\it \Lambda(\v x, t)}\psi(\v x,t)		\\[2pt]
+& &&\ = &&			
+\tt i\hbar\left (\partial_t -\frac{\tt i q}{\hbar}\partial _t \it\Lambda(\v x, t)\right )
+\exp{\frac{\tt i e}{\hbar}\it \Lambda(\v x, t)}\psi(\v x,t) \ \ .
+\end{alignat*}
+Dieses Ergebnis ist äquivalent zur Schrödingergleichung der gestrichenen Größen 
+\begin{alignat*}{5}
+& \Big [		\frac{1}{2m}\left (\^ p-q\v A ' \right )^2+q\it\Phi '\Big] \psi '(\v x,t)		
+&& \ =\	&& \tt i\hbar\partial_t \psi ' (\v x,t) \quad .
+\end{alignat*}
+Offensichtlich bewirkt eine Eichtransformation einen zusätzlichen, von Ort $\v x$ und Zeit $t$ abhängigen Phasenfaktor, was jedoch ohne Auswirkung auf physikalische Messgrößen bleibt, da $|\psi|^2$ sich nicht ändert. Genauso bleiben Matrixelemente von $\^x $ und $\^ p$ identisch. \\
+Auf diesem Ergebnis aufbauend, liegt es nahe das Vektorpotential so umzueichen, dass sich der Hamiltonoperator $H$ 
+einfacher darstellen lässt. Hierbei bietet sich die Coulombeichung an, welche die Divergenzfreiheit des Vektorfeldes $\v A$ zur Folge hat. Es gilt
+\begin{alignat*}{3}
+\tt{div}(\v A\,) \ \stackrel{!}{=} \ 0 &&\qquad \Rightarrow \qquad && \frac{1}{2}(\,\^p\v A + \v A\^p\,)\ =\  \v A\^p \ =\ \^p \v A \quad ,
+\end{alignat*}
+wodurch direkt erisichtlich ist, dass  
+\begin{alignat*}{3}
+(\^p -q \v A)^2 && \ =\ && \^p ^2 -2q \v A \^ p +q^2\v A \,^2 
+\end{alignat*}
+und für $H$ folgt
+\begin{alignat*}{3}
+& H(\^ x,\^ p,t)&& \ =\  && \frac{\^ p ^2}{2m} - \frac{q}{m}\^ p\v A +\frac{q}{2m}\v A\,^2+q\Phi  \quad .
+\end{alignat*}
+
+
+\subsection{Spezialfall: Konstantes Magnetfeld}
+[BESTE NOTATION, OPERATOREN VEKTOREN ]\\
+Für ein konstantes Magnetfeld $\v{B} = B\,\v{\tt{e}}_z\,$, welches ohne Beschränkung der Allgemeinheit in z-Richtung zeigen soll, sind verschiedene Eichungen für das Vektorpotential $\v A$ möglich, 
+\begin{alignat*}{3}
+(\tt{i})\quad \v A = \frac{1}{2}(\v B \times \v x \,) && \qquad \tt{oder} \qquad &&(\tt{ii})\quad \v A = xB\,\v{\tt e}_y \quad .
+\end{alignat*}
+In diesem Fall soll die symmetrische Eichung (i) gewählt werden und der Hamiltonoperator weiter ausgewertet werden. Eine kurze Rechnung zeigt unmittelbar, dass beide Eichungen die zuvor geforderte Divergenzfreiheit des Vektorfeldes $\v A$ erfüllen. Die Terme des Hamiltonoperators werden zu
+\begin{alignat*}{7}
+& \^p\v A && \ = \ && \frac{1}{2}\^p\,(\v B \times \v x)  && \qquad\qquad && \v A \,^2 &&\ =\ && \frac{1}{4}(\v B \times \v x)^2\\[2pt]
+& && \ = \ && \frac{1}{2}\v B \^L 										&& \qquad\qquad && 		&&\ =\ && \frac{1}{4}\left [\v x\,^2 \v B^2 - (\v x \v B)^2 \right ]
+\end{alignat*}
+und es gilt für den Hamiltonoperator
+\begin{alignat*}{3}
+& H(\^ x,\^ p,t)&& \ =\  && -\frac{\hbar^2}{2m}\Delta - \frac{q}{2m}\v B \^L  +\frac{q^2}{8m}\left [\v x\,^2 \v B^2 - (\v x \v B)^2 \right ] +q\it\Phi
+\end{alignat*}
+An dieser Stelle lässt sich schon die Ähnlichkeit zum Harmonischen Oszillator erahnen, welche im Folgenden noch weiter herausgestellt wird. Es zeigt sich deutlich, dass sich der Magnetfeldanteil des Hamiltonoperators in zwei Teile aufteilen lässt. Zum einen taucht hier ein Teilbetrag zum Paramagnetismus proportional zu $\v B \^ L$ auf und zum anderen ein diamagnetischer Teil, welcher durch das Ergebnis aus $\v A \,^2$ bestimmt wird. [WORAN ZU ERKENNEN] 
+Eine wichtige Anmerkung ist, dass der Spin noch völlig aus Acht gelassen wurde, was aufgrund des spineigenen magnetischen Moments $\mu_\tt s$ ohne weitere Begründung nicht zulässig ist. 
+\subsection{Spin}
+[WAS MUSS ICH ZUM SPIN SAGEN?]
+\subsection{Algebraische Darstellung}
+Bisher wurde zwischen zwei und drei Dimensionen noch nicht näher unterschieden. Da in dieser Arbeit jedoch insbesondere Magnetoexzitonen zweidimensionaler Materialien diskutiert werden sollen, werden die Elektronen von nun an auf die $xy$-Ebene eingeschränkt, während das Magnetfeld weiterhin in in $z$-Richtung zeigt soll. Diese Struktur angewandt auf den allgemeinen Hamiltonoperator führt zugleich zum Verschwinden des inneren Produkts aus $\v B$ und $\v x$. Darüber hinaus wird das Skalarpotential $\it \Phi$ vernachlässigt, da es für die magnetischen Effekte irrelevant ist. Demnach gilt für den Hamiltonoperator 
+\begin{alignat*}{3}
+& H(\^ x,\^ p,t)&& \ =\  && -\frac{\hbar^2}{2m}\Delta_{\v x} + \frac{eB}{2m} \^L_z  +\frac{e^2B^2}{8m}\v x \,^2  \quad .
+\end{alignat*}
+Es lohnt sich das Problem auf magnetische Größen zu transformieren, indem der Ort $\v x$ mit der magnetische Länge $l^2=\hbar / Be$ skaliert wird.
+\begin{alignat*}{4}
+\v x  = l \v \varrho  &&\qquad \tt{führt auf} \quad && 
+\arraycolsep=1.4pt\def\arraystretch{2.2}
+\begin{array}{*1{>{\displaystyle}c} *1{>{\displaystyle}l} *1{>{\displaystyle}r}}
+ \^L_z  &= -\tt i \hbar \left (x\pd{}{y}-y\pd{}{x}\right ) =  -\tt i \hbar \left (\varrho_x\pd{}{\varrho_y}-\varrho_y\pd{}{\varrho_x}\right ) = \hbar \^l_{\varrho_z}& \\[4pt]
+\Delta_{\v x} &= \sum_i \pd{^2}{x_i ^2} = \frac{1}{l^2}\sum_i \pd{^2}{\varrho_i ^2} = \frac{1}{l^2}\Delta_{\v \varrho} &.
+\end{array} 
+\end{alignat*}
+Dies eingesetzt führt auf  
+\begin{alignat*}{4}
+& H(\^ x,\^ p,t)&& \ =\  &&\frac{\hbar B e}{2m} && \left [ -\Delta_{\v \varrho} +  \^l_{\varrho_z}  +\frac{1}{4}\v \varrho \,^2 \right ] \\
+& && \ = \ && \frac{\hbar }{2}\,\omega_c && \left [ -\Delta_{\v \varrho} +  \^l_{\varrho_z}  +\frac{1}{4}\v \varrho \,^2 \right ] \quad , 
+\end{alignat*}
+wobei hier die Zyklotronfrequenz $\omega_c= Be/m$ eines geladenen Teilchens im Magnetfeld identifiziert werden konnte. Für die weitere Betrachtung werden neue Operatoren $\alpha$ und $\beta$ eingeführt, welche jedoch lediglich einen Zwischenschritt auf dem Weg zu den Landau-Niveaus beschreiben werden.
+\begin{alignat*}{5}
+& \alpha = \frac{\varrho_x-\tt i \varrho_y}{2}&&=\frac{\bar z}{2} && \qquad \tt{und} \qquad && \alpha\ind{}{\+} = \frac{\varrho_x+\tt i \varrho_y}{2}&&=\ \ \frac{ z}{2} \quad, \\
+& \beta = \partial_{\varrho_x}-\tt i \partial_{\varrho_y}&&=2\partial_z && \qquad \tt{und} \qquad && \beta\ind{}{\+} = -\partial_{\varrho_x}-\tt i \partial_{\varrho_y}&&=-2\partial_{\bar z} \quad.
+\end{alignat*}
+Im zweiten Schritt wurde jeweils die Analogie zur komplexen Ebene ausgenutzt, welche es ermöglicht den Wirtinger Kalkül zu gebrauchen. So ist schnell ersichtlich, dass für die Kommutatoren 
+\begin{alignat*}{3}
+ \com{\alpha}{\alpha\ind{}{\+}} = \com{\beta}{\beta\ind{}{\+}} = \com{\alpha}{\beta} = 0
+\end{alignat*}
+wie auch 
+\begin{alignat*}{3}
+\com{\alpha}{\beta\ind{}{\+}} = \alpha\beta\ind{}{\+} - \beta\ind{}{\+}\alpha= -\bar z\partial_{\bar z} + \partial_{\bar z} \bar z  =  \mathds{1} 
+= \com{\alpha}{\beta\ind{}{\+}}^{^{\scriptstyle \+}} = - \com{\alpha\ind{}{\+}}{\beta}
+\end{alignat*}
+gelten muss. Dies ermöglicht es nun die einzelnen Elemente von $H$ durch die neu eingeführten Operatoren $\alpha$ und $\beta$ auszudrücken. 
+\begin{alignat*}{8}
+& \frac{\varrho}{4}&&\ =\  \frac{z\bar z }{4}  &&\qquad && -\Delta_{\v \varphi}&&= 4\partial_z\partial_{\bar z}
+&& \qquad && l_{\varrho_z}  &&\ =\  \alpha\beta\ind{}{\+} + \alpha\ind{}{\+}\beta  \\
+& &&\ =\  \alpha\ind{}{\+}\alpha && && &&\ =\ \beta\beta\ind{}{\+}  && && && \ =\ \beta\ind{}{\+}\alpha + \alpha\ind{}{\+}\beta +1 
+\end{alignat*}
+Gemäß diesen Gleichungen lässt sich $H$ darstellen als 
+\begin{alignat*}{4}
+& H &&\ = \ && \frac{1}{2}&&\hbar\omega _c \left [-\Delta_{\v \varrho} + l_{\varrho_z} +\frac{1}{4}\v \varrho\, ^2\right ] \\
+& &&\ = \ &&\frac{1}{2}&&\hbar\omega_c \left [\alpha\ind{}{\+}\alpha + \beta\ind{}{\+}\alpha + \alpha\ind{}{\+}\beta +\beta\ind{}{\+}\beta+1\right ] \\
+& &&\ = \ && \frac{1}{2}&&\hbar\omega_c \left [(\alpha\ind{}{\+}+\beta\ind{}{\+})(\alpha+\beta)+1\right ] \\
+& &&\ = \ && &&\hbar\omega_c \left (a\ind{}{\+}a+\sfrac{1}{2}\right )\quad , \numberthis \label{Landau Hamiltonian Elektron}
+\end{alignat*}
+wobei der Hamiltonoperator nun durch die Inter-Landau Erzeuger- und Vernichteroperatoren $a\ind{}{\+}=\sfrac{1}{\sqrt{2}}\,(\alpha\ind{}{\+}+\beta\ind{}{\+})$ und $a=\sfrac{1}{\sqrt{2}}\,(\alpha+\beta)$  beschrieben wird. Unter Berücksichtigung der Intra-Landau Erzeuger und Vernichter $b\ind{}{\+}=\sfrac{1}{\sqrt{2}}\,(\alpha\ind{}{\+}-\beta\ind{}{\+})$ und $b=\sfrac{1}{\sqrt{2}}\,(\alpha-\beta)$ kann völlig analog zum Hamiltonoperator auch $l_{\varrho_z}$ umgeschrieben werden zu
+\begin{alignat*}{4}
+& l_{\varrho_z} &&\ = \ && &&\alpha\beta\ind{}{\+} + \alpha\ind{}{\+}\beta \\
+& &&\ =\ &&\frac{1}{2}&&\left [\alpha\beta\ind{}{\+}  + \beta\ind{}{\+}\alpha +1 + \alpha\ind{}{\+}\beta + \beta\alpha\ind{}{\+} -1\right ] \\
+& &&\ =\ &&\frac{1}{2}&&\left [(\alpha+\beta)(\alpha\ind{}{\+} +\beta\ind{}{\+}) - (\alpha\ind{}{\+}-\beta\ind{}{\+})(\alpha-\beta)\right ]\\
+& &&\ =\ &&&&aa\ind{}{\+} -bb\ind{}{\+} \quad . 
+\end{alignat*}
+Das Problem der Bewegung der Elektronen im Magnetfeld konnte nun, wie in \eqref{Landau Hamiltonian Elektron} ersichtlich, auf die Form des Harmonischen Oszillators gebracht werden, sodass das Problem der ungestörten Magnetoexzitonen nahezu gelöst ist. Offen bleibt, wie sich der Hamiltonoperator verändert, wenn anstatt der Elektronen Löcher betrachtet werden.
+\subsection{Loch-Hamiltonian und Eigenfunktionen}
+Die wesentliche Änderung von Elektron zu Loch wird neben der verschiedenen effektiven Masse $m$ durch das geänderte Vorzeichen der Ladung ausgedrückt. Dies hat zur Folge, dass der Hamiltonoperator $H$ zunächst die Form hat 
+\begin{alignat*}{3}
+& H(\^ x,\^ p,t) && \ = \ && \frac{\hbar }{2}\,\omega_c \left [ -\Delta_{\v \varrho} - \^l_{\varrho_z}  +\frac{1}{4}\v \varrho \,^2 \right]\quad .
+\end{alignat*}
+Für $l_{\varrho_z}$ wird nun die Ersetzung so gewählt, dass sich wieder der konstante Energiebeitrag des Grundzustandes $\sfrac{1}{2}\,\hbar \omega_c$ ergibt, sodass 
+\begin{alignat*}{3}
+& l_{\varrho_z} &&\ = \ &&\alpha\beta\ind{}{\+} + \alpha\ind{}{\+}\beta \\
+& &&\ =\ &&\alpha\beta\ind{}{\+} + \beta\alpha\ind{}{\+} -1 \quad .
+\end{alignat*}
+Dies führt unter Verwendung der zuvor hergeleiteten Relationen für $H$ direkt zu der Darstellung 
+\begin{alignat*}{4}
+& H &&\ = \ && \frac{1}{2}&&\hbar\omega_c \left [\alpha\alpha\ind{}{\+} -( \alpha\beta\ind{}{\+} +\beta\alpha\ind{}{\+})+\beta\beta\ind{}{\+}+1\right ] \\
+& &&\ = \ && \frac{1}{2}&&\hbar\omega_c \left [(\alpha\ind{}{\+}-\beta\ind{}{\+})(\alpha-\beta)+1\right ] \\
+& &&\ = \ && &&\hbar\omega_c \left (bb\ind{}{\+}+\sfrac{1}{2}\right )\numberthis \label{Landau Hamiltonian Loch} \quad .
+\end{alignat*}
+Wie in \eqref{Landau Hamiltonian Loch} gut zu erkennen ist, tauschen für die Betrachtung der Löcher die Inter-Landau Operatoren $a\ind{}{\+}$ und $a$ mit den Intra-Landau Operatoren $b\ind{}{\+}$ und $b$ die Rolle. Dieser Rollentausch gilt auch für den Drehimpulsoperator, wenn man definiert 
+\begin{alignat*}{5}
+l\ind{\varrho_z}{h} &&\ =\ && -l\ind{\varrho_z}{e} &&\ = \ && bb\ind{}{\+}-aa\ind{}{\+} \quad .
+\end{alignat*}
+Um sicher zu gehen, dass ein gemeinsamer Satz von Eigenfunktionen zu $H\ind{}{e}$ und $H\ind{}{h}$ existiert, wird noch einmal der Wirtinger Kalkül benutzt, um die Vertauschungsrelation $\com{H\ind{}{e}}{H\ind{}{h}}$ zu bestimmen. Diese lässt sich auf die Auswertung der Kommutatoren 
+\begin{alignat*}{3}
+& \com{a}{b\ind{}{\+}} && \ = \ &&\com{a}{a\ind{}{\+}}\ =\ \com{b}{b\ind{}{\+}}\ =\ 0 \\ \\
+& \com{a}{b} &&\ =\ && \frac{1}{2}\Big(\,\frac{1}{2}\bar z + 2\partial_{z}\Big)\Big(\,\frac{1}{2}z + 2\partial_{\bar z}\Big) -\frac{1}{2}\Big(\,\frac{1}{2}z + 2\partial_{\bar z}\Big)\Big(\,\frac{1}{2}\bar z + 2\partial_{ z}\Big)\\[3pt]
+& &&\ =\ && \frac{1}{2}[\bar z \partial_{\bar z}+1 +z\partial_z - (z \partial_{ z}+1 +\bar z\partial_{\bar z})] \\[3pt]
+& &&\ =\ && 0 \\
+& &&\ =\ && \com{b\ind{}{\+}}{a\ind{}{\+}}
+\end{alignat*}
+beschränken, denn dann ist sofort ersichtlich, dass 
+\begin{alignat*}{3}
+& \com{H\ind{}{e}}{H\ind{}{h}} &&\ =\ && (a\ind{}{\+}a+\sfrac{1}{2})(b\ind{}{\+}b+\sfrac{1}{2})-(b\ind{}{\+}b+\sfrac{1}{2})(a\ind{}{\+}a+\sfrac{1}{2}) \\
+& &&\ = \ && a\ind{}{\+}ab\ind{}{\+}b - b\ind{}{\+}ba\ind{}{\+}a \\
+& &&\ = \ && 0
+\end{alignat*}
+gelten muss und gemeinsame Eigenfunktionen existieren müssen. Diese Landau Eigenfunktionen $\it{\Phi}\ind{nn'}{}$ werden nun mit $n$ und $n'$ indiziert, wobei dies die Eigenwerte der Operatoren $\^ n = a\ind{}{\+}a$ und $\^n '= b\ind{}{\+}b $ sein sollen. \\
+Natürlich muss ein Vernichtungsoperator $a$ oder $b$ angewandt auf den Grundzustand $\it{\Phi}_{00}$ eine $0$ ergeben. Aus dieser Forderung folgt eine separierbare Differentialgleichung, deren Lösung die explizite Darstellung des Grundzustands ist. 
+\begin{alignat*}{7}
+& && a&&\it{\Phi}_{00} &&\ =\ && \tfrac{1}{\sqrt{2}}\left (\frac{\varrho_x -\tt i\varrho_y}{2}+\partial_{\varrho_x}-\tt i \partial_{\varrho_y}\right )\ck 0\ket \ck 0\ket &&\ \stackrel{!}{=} \ &&0 \\[5pt]
+& \Rightarrow  \quad  && &&\it{\Phi}_{00} &&\ = \ && \tfrac{1}{\sqrt{2\pi}}\exp{\sfrac{-(\varrho_x ^2 + \varrho_y ^2)}{4}}
+\end{alignat*}
+Der Vorfaktor $\sfrac{1}{\sqrt{2\pi}}$ ergibt sich aus der Norm und dem damit verbundenen Gauß-Integral. Auf dasselbe Ergebnis kommt man ebenso, wenn man die Relation für $b$ auswertet, sodass ausgehend von $\it{\Phi}_{00}$ nun alle weiteren Landau Zustände explizit bestimmt werden können. Dabei gelten die Zusammenhänge 
 \end{document}
