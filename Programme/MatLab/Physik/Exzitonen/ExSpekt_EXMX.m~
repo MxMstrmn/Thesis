@@ -4,7 +4,7 @@
 hold on;
  
 EXMX      = 'MX' ; 
-UNIT      = 'NONE';
+UNIT      = 'SI';
 
 
 switch EXMX
@@ -26,7 +26,7 @@ switch EXMX
     case 'MX'
         %==================================
         n           = 169; 
-        lambda      = 1.5*[1 2 4 6 10 16]  ;  
+        MagField      = 1.5*[1 2 4 6 10 16]  ;  
         phi         = linspace(-700,100,600) ;
         Potential   = 'Keldysh' ; 
         Method      = 'Num' ; 
@@ -34,7 +34,7 @@ switch EXMX
         
         for i=1:6
         ax          = subplot(3,2,i);   
-        Input_mx    = {n,lambda(i),phi,Potential,Method};
+        Input_mx    = {n,MagField(i),phi,Potential,Method};
         
         
         
@@ -68,7 +68,7 @@ switch EXMX
         end
         
         grid(ax,'on'); set(gca,'GridLineStyle', '--', 'fontsize',13);
-        legend(plot_i,['\lambda = ' num2str(lambda(i))],'interpreter','latex');
+        legend(plot_i,['\lambda = ' num2str(MagField(i))],'interpreter','latex');
         end
 end
 set(gcf, 'Position', [100, 100, 750, 900])

@@ -6,7 +6,7 @@ dim                 = n+1 ;
 
 c               = constants(); 
 B               = B * c.unitB ; 
-disp(B/unitB)
+disp(['B = ' num2str(B/c.unitB)])
 % MoS2
 mu              = 0.46*0.41/0.87*c.me ;
 % a0              = 1.1016 ; 
@@ -27,8 +27,8 @@ wc              = c.e*B/mu ;
 A0              = @(mu) 4*pi*c.eps0*c.eps*c.hbar^2/mu/c.e^2;
 lambda          = A0(mu)^2*B*c.e/c.hbar; 
 EB              = c.hbar.^2 /2 / mu / A0(mu)^2 ;
-disp(lambda)
-disp(EB)
+disp(['Lambda = ' num2str(lambda)])
+disp(['3D Bindungsenergie: ' num2str(EB)])
 
 switch Potential
     case 'Coulomb'

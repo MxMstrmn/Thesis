@@ -7,7 +7,7 @@ magnlen     = @(B)      sqrt(c.hbar/(B*c.e)) ;
 
 % Parameter 
 alpha   = 1; 
-beta    = alpha*2*pi*0.66; 
+beta    = 2.1; %alpha*2*pi*0.66; 
 B       = B * c.unitB;
 
 % Keldysh function for Gauss-Laguerre Integration
