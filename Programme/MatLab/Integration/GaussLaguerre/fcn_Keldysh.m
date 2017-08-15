@@ -6,8 +6,8 @@ L           = @(n,a,x)  lf_function(length(x),n,a,x(:));
 magnlen     = @(B)      sqrt(c.hbar/(B*c.e)) ; 
 
 % Parameter 
-alpha   = 1; 
-beta    = 2.1; %alpha*2*pi*0.66; 
+alpha   = 0.72; 
+beta    = 4.54; %alpha*2*pi*0.66; 
 B       = B * c.unitB;
 
 % Keldysh function for Gauss-Laguerre Integration

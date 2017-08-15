@@ -1,7 +1,7 @@
 % clear all
 % clc 
-%figure
-hold on;
+figure
+%hold on;
  
 EXMX      = 'MX' ; 
 UNIT      = 'SI';
@@ -25,14 +25,14 @@ switch EXMX
         grid on;                    set(gca,'GridLineStyle', '--', 'fontsize',13);
     case 'MX'
         %==================================
-        n           = 169; 
-        LambdaOrB   = 1.5*[1 2 4 6 10 16]  ;  % Depends on your input, either magnetic field B or dimensionless quantity lambda 
+        n           = 20; 
+        LambdaOrB   = 150;%1.5*[1 2 4 6 10 16]  ;  % Depends on your input, either magnetic field B or dimensionless quantity lambda 
         phi         = linspace(-700,100,600) ;
-        Potential   = 'Coulomb' ; 
-        Method      = 'Ana' ; 
+        Potential   = 'Keldysh' ; 
+        Method      = 'Num' ; 
         %==================================
         
-        for i=1:6
+        for i=1:min(length(LambdaOrB),6)
         ax          = subplot(3,2,i);   
         Input_mx    = {n,LambdaOrB(i),phi,Potential,Method};
         
