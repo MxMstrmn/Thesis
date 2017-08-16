@@ -1,4 +1,15 @@
-\documentclass[a4paper,11pt]{article}
+\documentclass[a4paper,11pt, twoside]{article}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{ \textit{Bachelorarbeit Leon Hetzel}}
+\fancyhead[RE,LO]{\rightmark}
+\fancyfoot[CE,CO]{\thepage}
+\fancyfoot[LE,RO]{}
+
+
 \usepackage[utf8]{inputenc}
 %\usepackage[latin1]{inputenc} 
 %\usepackage[ngerman]{babel}
@@ -6,6 +17,7 @@
 \usepackage{dsfont}					% Einheitsoperator
 \usepackage{lmodern}
 \usepackage{amsmath}				% Mathe
+\usepackage{bm}							% Bold Maths
 \usepackage{array}						% Array Umgebung
 \usepackage{xfrac}						% sfrac / xfrac
 %\usepackage{classicthesis}
@@ -371,5 +383,41 @@ Natürlich muss ein Vernichtungsoperator $a$ oder $b$ angewandt auf den Grundzus
 & && a&&\it{\Phi}_{00} &&\ =\ && \tfrac{1}{\sqrt{2}}\left (\frac{\varrho_x -\tt i\varrho_y}{2}+\partial_{\varrho_x}-\tt i \partial_{\varrho_y}\right )\ck 0\ket \ck 0\ket &&\ \stackrel{!}{=} \ &&0 \\[5pt]
 & \Rightarrow  \quad  && &&\it{\Phi}_{00} &&\ = \ && \tfrac{1}{\sqrt{2\pi}}\exp{\sfrac{-(\varrho_x ^2 + \varrho_y ^2)}{4}}
 \end{alignat*}
-Der Vorfaktor $\sfrac{1}{\sqrt{2\pi}}$ ergibt sich aus der Norm und dem damit verbundenen Gauß-Integral. Auf dasselbe Ergebnis kommt man ebenso, wenn man die Relation für $b$ auswertet, sodass ausgehend von $\it{\Phi}_{00}$ nun alle weiteren Landau Zustände explizit bestimmt werden können. Dabei gelten die Zusammenhänge 
+Der Vorfaktor $\sfrac{1}{\sqrt{2\pi}}$ ergibt sich aus der Norm und dem damit verbundenen Gauß-Integral. Auf dasselbe Ergebnis kommt man ebenso, wenn man die Relation für $b$ auswertet, sodass ausgehend von $\it{\Phi}_{00}$ nun alle weiteren Landau Zustände explizit bestimmt werden können. Dabei gelten die Zusammenhänge [Hier noch weiter machen]
+\newpage
+\subsection{Fouriertransformation der Potentiale}
+Um die Matrixelemente des Coulomb- oder Keldysh-Potentials in der Landau Basis $\it{\Phi}_{nn'}$ berechnen zu können, ist es notwendig die Fouriertransformationen zu den Potentialen im Ortsraum zu bilden. 
+\begin{alignat*}{3}
+& V_\tt{C} &&\ = \ && \frac{e^2}{4\pi\varepsilon_0\varepsilon_r}\frac{1}{r} \\[4pt]
+& V_\tt{K} &&\ = \ && \frac{e^2}{4\alpha_\tt{2D}}\left [H_0\Big(\frac{r}{r_0}\Big)+Y_0\Big(\frac{r}{r_0}\Big)\right ] 
+\end{alignat*}
+Allerdings wird bei der Herleitung der Landau Niveaus der Ort $\v r=l\v \varrho$ über die magnetische Länge $l$ so skaliert, dass der dimensionslose Ort $\varrho$ diejenige Variable ist bzgl. die Landau Basis $\it{\Phi}_{nn'}$ aufgestellt wird. Dabei soll auf jeden Fall der Zusammenhang 
+\begin{alignat*}{3}
+\~V(\varrho) &&\ = \ && \frac{1}{L^2}\sum_{\~{\bm k}} \~V(\~ k)\exp{\tt i \~{\bm k}\bm{\varrho}}
+\end{alignat*}
+gelten. Um dies zu erfüllen und außerdem die bisherigen algebraischen Zusammenhänge weiterhin bedenkenlos nutzen zu können, muss die Fouriertransformation also bzgl. des dimensionslosen Ortes $\v \varrho$ und Impulses $\~{\bm k}$ durchgeführt werden. Für $V_\tt{C}$ geht dies sogar analytisch, denn 
+\begin{alignat*}{4}
+& \~V_\tt{C}\,(\~ k\, ) &&\ = \ && \int \tt{d}^2 \varrho\, \frac{e^2}{4\pi\varepsilon}\frac{1}{l\varrho}\exp{\tt i\~\mathbf{k}\bm{\varrho}} &&\qquad,\ \ \varepsilon = \varepsilon_0\varepsilon_r\\
+& &&\ = \ && \frac{e^2}{4\pi\varepsilon l} \int\limits_0^{\infty} \tt d\varrho \int\limits_0^{2\pi}\tt d \varphi \,\exp{\tt i\~k\varrho\cos(\varphi)} \\
+& &&\ = \ && \frac{e^2}{4\pi\varepsilon l} \cdot  \frac{2\pi}{\~k}\int\limits_0^{\infty} \tt d(\~k\varrho)\, J_0(\~k \varrho)  \\
+& &&\ = \ && \frac{e^2}{2\varepsilon l} \frac{1}{\~k} \quad .
+\end{alignat*}
+Offensichtlich kommt es durch diese dimensionslose Transformation zu keinem Einheitenwechsel vom Orts- zum Impulsraum. Wegen des Exponenten $i\~\mathbf{k}\bm{\varrho}$ handelt es sich außerdem bei der Ersetzung $\v r = l \varrho$  nicht um eine Skalierung des Ortes $x\rightarrow ax$ im klassischen Sinne, sondern es gilt 
+\begin{alignat*}{8}
+& V(k) && \ = \ && && \int \tt d^2 r \,  V(r)  \exp{\tt i\bm k \bm r} 
+ && \ = \ && &&\int \tt d^2 (l\varrho) \,  V(l\varrho)  \exp{\tt i l \bm k \bm \varrho} \\[4pt]
+& && \ = \ && l &&\int \tt d^2 \varrho \,  \~V(\varrho)  \exp{\tt i l \bm k \bm \varrho} 
+ && \ = \ && l &&\int \tt d^2 \varrho \,  \~V(\varrho)  \exp{\tt i \~{\bm k} \bm \varrho} \\[4pt]
+& && \ = \ && l &&\,\~V(\~ k) 
+\end{alignat*}
+Diesem Ergebnis zur Folge wird durch die dimensionslose Transformation nicht die Variable selbst skaliert, sondern das gesamte Potential. Für das Keldysh Potential bedeutet dies 
+\begin{alignat*}{8}
+& && V_\tt{K}(r) &&\ = \ && \frac{e^2}{4\alpha_\tt{2D}}\left [H_0\Big(\frac{r}{r_0}\Big)+Y_0\Big(\frac{r}{r_0}\Big)\right ] 
+&&\quad \leftrightarrow\quad &&
+V_\tt{K}(k) &&\ = \ && \frac{2\pi e^2}{k(1+2\pi\alpha_\tt{2D}k)} \\[5pt]
+& \Rightarrow\ \ && \~V_\tt{K}(\varrho) &&\ = \ && \frac{e^2}{4\alpha_\tt{2D}}\left [H_0\Big(\frac{l\varrho}{r_0}\Big)+Y_0\Big(\frac{l\varrho}{r_0}\Big)\right ] 
+&&\quad \leftrightarrow\quad &&
+\~V_\tt{K}(\~k) &&\ = \ && \frac{2\pi e^2}{l\~ k(1+2\pi\alpha_\tt{2D}\~ k\,)} 
+\end{alignat*}
+\newpage
 \end{document}
