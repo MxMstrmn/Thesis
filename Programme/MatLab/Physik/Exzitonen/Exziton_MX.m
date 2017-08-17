@@ -53,7 +53,7 @@ switch Potential
 
     case 'Keldysh'
         try 
-            V_ij        =  - 2*pi*c.e *csvread(['VK_ij_B' num2str(B_SI) '_' num2str(n) '.dat']);
+            V_ij        =  - cPot/magnlen(B_meV) *csvread(['VK_ij_B' num2str(B_SI) '_' num2str(n) '.dat']);
             
         catch
             disp('Berechne Keldysh-Matrix erst mit gaussLaguerre.m')
@@ -69,12 +69,7 @@ Inh_ii      = @(n,phi)  eye(dim)*( -phi    -1i*10     ) ;
 switch Output
     case 'Spektrum'
         H           = Hmx_ii(n) + V_ij ;
-        
-        figure
-        imagesc(H)
-        figure
-        imagesc(Inh_ii)
-        figure
+
         
         b           = ones (     dim    ,1) ;
         X           = zeros(length(phi) ,1) ;

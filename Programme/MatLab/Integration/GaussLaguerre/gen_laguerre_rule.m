@@ -28,8 +28,8 @@ function gen_laguerre_rule ( order, alpha, a, b, filename )
 %
 %    John Burkardt
 %
-  time_stamp ( );
-  fprintf ( 1, '\n' );
+%   time_stamp ( );
+%   fprintf ( 1, '\n' );
 %   fprintf ( 1, 'GEN_LAGUERRE_RULE\n' );
 %   fprintf ( 1, '  MATLAB version\n' );
 %   fprintf ( 1, '\n' );
@@ -128,8 +128,8 @@ function gen_laguerre_rule ( order, alpha, a, b, filename )
 %   fprintf ( 1, '\n' );
 %   fprintf ( 1, 'GEN_LAGUERRE_RULE:\n' );
 %   fprintf ( 1, '  Normal end of execution.\n' );
-  fprintf ( 1, '\n' );
-  time_stamp ( );
+%   fprintf ( 1, '\n' );
+%   time_stamp ( );
 
   return
 end

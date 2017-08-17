@@ -34,14 +34,14 @@ function rule_write ( order, filename, x, w, r )
   filename_w = strcat ( filename, '_w.txt' );
   filename_r = strcat ( filename, '_r.txt' );
 
-  fprintf ( 1, '\n' );
-  fprintf ( 1,'  Creating quadrature files.\n' );
-  fprintf ( 1, '\n' );
-  fprintf ( 1, '  "Root" file name is   "%s".\n', filename );
-  fprintf ( 1, '\n' );
-  fprintf ( 1, '  Weight file will be   "%s".\n', filename_w );
-  fprintf ( 1, '  Abscissa file will be "%s".\n', filename_x );
-  fprintf ( 1, '  Region file will be   "%s".\n', filename_r );
+%   fprintf ( 1, '\n' );
+%   fprintf ( 1,'  Creating quadrature files.\n' );
+%   fprintf ( 1, '\n' );
+%   fprintf ( 1, '  "Root" file name is   "%s".\n', filename );
+%   fprintf ( 1, '\n' );
+%   fprintf ( 1, '  Weight file will be   "%s".\n', filename_w );
+%   fprintf ( 1, '  Abscissa file will be "%s".\n', filename_x );
+%   fprintf ( 1, '  Region file will be   "%s".\n', filename_r );
 
   r8mat_write ( filename_w, 1, order, w' );
   r8mat_write ( filename_x, 1, order, x' );

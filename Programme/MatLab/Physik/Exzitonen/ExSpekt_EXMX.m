@@ -1,7 +1,7 @@
 % clear all
 % clc 
-figure
-%hold on;
+%figure
+hold on;
  
 EXMX      = 'MX' ; 
 UNIT      = 'SI';
@@ -25,10 +25,10 @@ switch EXMX
         grid on;                    set(gca,'GridLineStyle', '--', 'fontsize',13);
     case 'MX'
         %==================================
-        n           = 20; 
-        LambdaOrB   = 150;%1.5*[1 2 4 6 10 16]  ;  % Depends on your input, either magnetic field B or dimensionless quantity lambda 
+        n           = 70; 
+        LambdaOrB   = [1.5 8 15 20 30 100]  ;  % Depends on your input, either magnetic field B or dimensionless quantity lambda 
         phi         = linspace(-700,100,600) ;
-        Potential   = 'Keldysh' ; 
+        Potential   = 'Coulomb' ; 
         Method      = 'Num' ; 
         %==================================
         
@@ -47,8 +47,8 @@ switch EXMX
         end
         
         
-        plot_i      = plot(ax,hw, imag(X)/max(imag(X)), 'b',    'linewidth', 2.0) ; hold on
-        stem_i      = stem(ax,EW, ones(1, length(EW)), 'b--',   'linewidth', 1.1, ...
+        plot_i      = plot(ax,hw, imag(X)/max(imag(X)), 'r',    'linewidth', 2.0) ; hold on
+        stem_i      = stem(ax,EW, ones(1, length(EW)), 'r--',   'linewidth', 1.1, ...
                             'markeredgecolor', 'none') ;
         
         xlim([min(hw) max(hw)]); ylim([0 1.1]); 
@@ -68,7 +68,7 @@ switch EXMX
         end
         
         if strcmp(UNIT, 'SI')
-            legend(plot_i,['B = ' num2str(LambdaOrB(i))],'interpreter','latex');
+            legend(plot_i,['B = ' num2str(LambdaOrB(i)) ' T'],'interpreter','latex');
         else
             legend(plot_i,['\lambda = ' num2str(LambdaOrB(i))],'interpreter','latex');
         end

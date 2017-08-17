@@ -37,7 +37,9 @@ for jj=0:dim
         setGlobaln1(n1) ;
         beta        = n1-n-0.5 ;
          
-        disp(['Ordnung ist ' num2str(order(n)) ' bei n=' num2str(n)])
+
+%             disp(['Ordnung ist ' num2str(order(n)) ' bei n=' num2str(n)])
+
         gen_laguerre_rule(order(n),beta,0,1,fcn)
         
         H           = fscanf(fopen([fcn '_w.txt'],'r'),formatSpec);
@@ -47,15 +49,20 @@ for jj=0:dim
         const       = sqrt(pi)*factorial(n)/factorial(n1);
         
         GAUSSLAGUERRE       = const*(H.'*f(ak));
-        fprintf('\n GAUSSLAGUERRE = %0.4g \n',GAUSSLAGUERRE)
+%         fprintf('\n GAUSSLAGUERRE = %0.4g \n',GAUSSLAGUERRE)
         
         V_ij(ii+1,jj+1)    = GAUSSLAGUERRE ; 
         V_ij(jj+1,ii+1)    = V_ij(ii+1,jj+1) ; 
         
         fclose all;
     end
+    if mod(jj,10)==0
+        disp(['Matrix ist zu ' num2str(round(jj*100/dim)) '% berechnet'])
+    end
 end
 csvwrite(['MatrixFiles/' prefix num2str(max(n)) '.dat'], V_ij)  
+%disp('Fertig')
+disp(['--> Matrix wurde in "MatrixFiles/' prefix num2str(max(n)) '.dat" gespeichert'])
 end
 
 
