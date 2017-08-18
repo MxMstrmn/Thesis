@@ -6,6 +6,7 @@
 *.tex.bak
 *.cej
 *.nfs*
+*.toc*
 .gz
 .DS_Store
 Texte/.DS_Store
